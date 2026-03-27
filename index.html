@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>🇯🇵 Viaje a Japón 2026</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#C0392B" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Japón 2026" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+
+    :root {
+      --red: #C0392B;
+      --pink: #F8D7DA;
+      --dark: #1a1a2e;
+      --card: rgba(255, 252, 245, 0.97);
+      --accent: #e8344e;
+      --gold: #D4A017;
+      --bg: #f0e8d5;
+      --text: #2c2c2c;
+      --border: #e0d6cc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background-color: #f0e8d5;
+      background-image:
+        /* Marco exterior grueso */
+        linear-gradient(rgba(90, 55, 20, 0.55) 3px, transparent 3px),
+        linear-gradient(90deg, rgba(90, 55, 20, 0.55) 3px, transparent 3px),
+        /* Divisiones interiores de panel */
+        linear-gradient(rgba(90, 55, 20, 0.22) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(90, 55, 20, 0.22) 1.5px, transparent 1.5px),
+        /* Textura fina de papel washi */
+        linear-gradient(rgba(180, 140, 80, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180, 140, 80, 0.06) 1px, transparent 1px);
+      background-size:
+        240px 320px, 240px 320px,
+        80px 80px,   80px 80px,
+        20px 20px,   20px 20px;
+      background-position:
+        0 0, 0 0,
+        0 0, 0 0,
+        0 0, 0 0;
+    }
+
+    /* Sutil viñeta perimetral */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(80, 40, 10, 0.18) 100%);
+      z-index: 0;
+    }
+
+    main, header, .route-bar, footer { position: relative; z-index: 1; }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--dark) 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      text-align: center;
+      padding: 50px 20px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "🌸";
+      font-size: 120px;
+      position: absolute;
+      top: -20px; left: -20px;
+      opacity: 0.07;
+    }
+    header::after {
+      content: "⛩️";
+      font-size: 130px;
+      position: absolute;
+      bottom: -20px; right: -10px;
+      opacity: 0.07;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    header .subtitle {
+      font-size: 1.1em;
+      margin-top: 8px;
+      opacity: 0.85;
+      letter-spacing: 2px;
+    }
+    header .travelers {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    header .traveler-chip {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-size: 0.95em;
+    }
+    header .dates-badge {
+      margin-top: 22px;
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      border-radius: 30px;
+      padding: 8px 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1em;
+    }
+
+    /* ── ROUTE BAR ── */
+    .route-bar {
+      background: var(--accent);
+      color: white;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 0.95em;
+      letter-spacing: 1px;
+    }
+    .route-bar span { margin: 0 8px; opacity: 0.7; }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 30px 16px 60px;
+      position: relative;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6em;
+      color: white;
+      border-left: 5px solid var(--gold);
+      padding: 10px 18px;
+      margin: 40px 0 18px;
+      background: linear-gradient(90deg, var(--dark) 0%, rgba(26,26,46,0.85) 70%, transparent 100%);
+      border-radius: 0 8px 8px 0;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* ── DAY CARD ── */
+    .day-card {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+    .day-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .day-header.osaka   { background: linear-gradient(90deg, #fff3cd, #ffffff); }
+    .day-header.nara    { background: linear-gradient(90deg, #d4edda, #ffffff); }
+    .day-header.kioto   { background: linear-gradient(90deg, #d1ecf1, #ffffff); }
+    .day-header.tokio   { background: linear-gradient(90deg, #f8d7da, #ffffff); }
+    .day-header.transit { background: linear-gradient(90deg, #e2e3e5, #ffffff); }
+
+    .day-number {
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 1em;
+      flex-shrink: 0;
+    }
+    .day-number.transit-num { background: #6c757d; }
+    .day-number.osaka-num   { background: #e67e22; }
+    .day-number.nara-num    { background: #27ae60; }
+    .day-number.kioto-num   { background: #2980b9; }
+    .day-number.tokio-num   { background: #c0392b; }
+
+    .day-info h3 { font-size: 1.1em; font-weight: 700; color: var(--dark); }
+    .day-info .day-date { font-size: 0.85em; color: #666; margin-top: 2px; }
+    .day-info .day-emoji { font-size: 1.3em; }
+
+    .day-toggle {
+      margin-left: auto;
+      font-size: 1.3em;
+      color: #aaa;
+      transition: transform 0.3s;
+    }
+    .day-toggle.open { transform: rotate(180deg); }
+
+    .day-body {
+      padding: 18px 22px 22px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+    .day-body.open { display: block; }
+
+    /* ── SECTIONS INSIDE CARD ── */
+    .card-section { margin-bottom: 20px; }
+    .card-section:last-child { margin-bottom: 0; }
+    .card-section h4 {
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .info-list { list-style: none; }
+    .info-list li {
+      padding: 5px 0 5px 16px;
+      position: relative;
+      font-size: 0.93em;
+      line-height: 1.6;
+      color: #444;
+    }
+    .info-list li::before {
+      content: "▸";
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+
+    /* ── LINK BOX ── */
+    .link-box {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      background: #fafafa;
+      position: relative;
+    }
+    .link-box .link-label {
+      font-size: 0.82em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .link-input-row {
+      display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    }
+    .link-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 9px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.9em;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s;
+      background: white;
+    }
+    .link-input:focus { border-color: var(--accent); }
+    .link-btn {
+      padding: 9px 18px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.88em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .link-btn:hover { background: #a93226; }
+    .link-saved {
+      font-size: 0.88em;
+      color: #27ae60;
+      margin-top: 6px;
+      display: none;
+    }
+    .link-saved.show { display: block; }
+    .link-view {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eafaf1;
+      border: 1px solid #a9dfbf;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 0.88em;
+      color: #1e8449;
+      text-decoration: none;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+    .link-view:hover { background: #d5f5e3; }
+
+    /* ── TRANSPORT BADGE ── */
+    .transport-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eaf4fd;
+      border: 1px solid #aed6f1;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.82em;
+      color: #1a5276;
+      margin: 4px 4px 4px 0;
+    }
+
+    /* ── RESTAURANT GRID ── */
+    .resto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .resto-card {
+      background: #fffaf5;
+      border: 1px solid #f0e8dc;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.88em;
+    }
+    .resto-card .resto-name { font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .resto-card .resto-type {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      border-radius: 12px;
+      padding: 1px 10px;
+      font-size: 0.78em;
+      margin-bottom: 6px;
+    }
+    .resto-card .resto-detail { color: #666; line-height: 1.5; }
+
+    /* ── ATTRACTIONS ── */
+    .attraction-item {
+      display: flex; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .attraction-item:last-child { border-bottom: none; }
+    .attraction-num {
+      background: var(--dark);
+      color: white;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8em;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .attraction-content { flex: 1; }
+    .attraction-name { font-weight: 700; color: var(--dark); font-size: 0.95em; }
+    .attraction-desc { color: #555; font-size: 0.87em; margin-top: 3px; line-height: 1.5; }
+    .attraction-meta {
+      display: flex; gap: 10px; margin-top: 5px; flex-wrap: wrap;
+    }
+    .meta-badge {
+      background: #f0f0f0;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.78em;
+      color: #555;
+    }
+
+    /* ── ENTRY/EXIT ── */
+    .checkin-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .checkin-chip {
+      background: #eaf4fd; border: 1px solid #aed6f1;
+      border-radius: 20px; padding: 4px 16px;
+      font-size: 0.85em; color: #1a5276;
+    }
+
+    /* ── NOTES BOX ── */
+    .notes-area {
+      width: 100%; min-height: 70px;
+      padding: 10px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.9em;
+      font-family: inherit;
+      resize: vertical;
+      background: #fafafa;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .notes-area:focus { border-color: var(--accent); background: white; }
+
+    /* ── SUMMARY CARDS ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .summary-card {
+      background: white;
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .summary-card .s-emoji { font-size: 2em; }
+    .summary-card .s-num { font-size: 1.8em; font-weight: 700; color: var(--accent); margin: 4px 0; }
+    .summary-card .s-label { font-size: 0.82em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+
+
+
+    /* ── DOCS SUBGROUPS ── */
+
+    .resto-prefilled { background: #fffaf5; }
+    .resto-prefilled .link-label { font-size:0.9em; margin-bottom:0; }
+
+    .docs-groups { display: flex; flex-direction: column; gap: 10px; }
+    .docs-subgroup { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .docs-subgroup-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 13px 18px;
+      background: #f7f3ee;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .docs-subgroup-header:hover { background: #ede8e0; }
+    .docs-subgroup-emoji { font-size: 1.3em; }
+    .docs-subgroup-title { flex: 1; font-weight: 700; font-size: 0.95em; color: var(--dark); }
+    .docs-subgroup-toggle { font-size: 1.1em; color: #aaa; transition: transform 0.3s; }
+    .docs-subgroup-toggle.open { transform: rotate(180deg); }
+    .docs-subgroup-body { display: none; padding: 14px; background: white; }
+    .docs-subgroup-body.open { display: block; }
+
+    /* ── CITY GROUPS ── */
+    .city-group { margin-bottom: 18px; }
+
+    .city-group-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .city-group-header:hover { box-shadow: 0 5px 20px rgba(0,0,0,0.13); }
+
+    .city-group-emoji { font-size: 2em; flex-shrink: 0; }
+    .city-group-info { flex: 1; }
+    .city-group-title { font-family: 'Playfair Display', serif; font-size: 1.25em; font-weight: 700; }
+    .city-group-sub { font-size: 0.85em; color: #666; margin-top: 3px; }
+    .city-group-toggle { font-size: 1.3em; color: #aaa; transition: transform 0.3s; }
+    .city-group-toggle.open { transform: rotate(180deg); }
+
+    .city-group-body {
+      display: none;
+      padding: 14px 0 4px 18px;
+      border-left: 3px solid #e0d6cc;
+      margin-left: 22px;
+      margin-top: 6px;
+    }
+    .city-group-body.open { display: block; }
+    .city-group-body .day-card { margin-bottom: 14px; }
+
+    /* ── DOCS GRID ── */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .doc-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--text);
+      cursor: pointer;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .doc-card:hover {
+      box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+      border-color: var(--accent);
+    }
+    .doc-card.doc-empty {
+      border-style: dashed;
+      opacity: 0.6;
+    }
+    .doc-card.doc-empty:hover { opacity: 1; }
+    .doc-icon { font-size: 2em; flex-shrink: 0; }
+    .doc-info { flex: 1; }
+    .doc-name { font-weight: 700; font-size: 0.95em; color: var(--dark); }
+    .doc-sub { font-size: 0.8em; color: #888; margin-top: 2px; }
+    .doc-arrow { font-size: 1.3em; color: var(--accent); font-weight: 700; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.82em;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.9em; }
+      .resto-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+<header>
+  <h1>🇯🇵 Viaje a Japón</h1>
+  <div class="subtitle">🌸 Temporada de Sakura · Abril 2026 🌸</div>
+  <div class="travelers">
+    <span class="traveler-chip">👨 Pablo</span>
+    <span class="traveler-chip">👩 Natalia</span>
+    <span class="traveler-chip">👧 Lucía</span>
+  </div>
+  <div class="dates-badge">7 Abril → 22 Abril 2026 · 15 días</div>
+</header>
+
+<div class="route-bar">
+  ✈️ Alicante &nbsp;<span>→</span>&nbsp; Madrid &nbsp;<span>→</span>&nbsp; Osaka &nbsp;<span>→</span>&nbsp; Nara &nbsp;<span>→</span>&nbsp; Kioto &nbsp;<span>→</span>&nbsp; Tokio &nbsp;<span>→</span>&nbsp; Madrid &nbsp;<span>→</span>&nbsp; Alicante
+</div>
+
+<!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+<main>
+
+
+  <!-- ═══ DOCUMENTOS DEL VIAJE ═══ -->
+  <div class="day-card" style="margin-bottom:20px">
+    <div class="day-header transit" onclick="toggleDay(this)" style="cursor:pointer">
+      <div class="day-number transit-num">📂</div>
+      <div class="day-info">
+        <div class="day-emoji"></div>
+        <h3>Documentos del viaje</h3>
+        <div class="day-date">Billetes, hoteles y entradas</div>
+      </div>
+      <div class="day-toggle">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="docs-groups">
+
+  <!-- PASAPORTES -->
+  <div class="docs-subgroup">
+    <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)">
+      <span class="docs-subgroup-emoji">🛂</span>
+      <span class="docs-subgroup-title">Pasaportes</span>
+      <span class="docs-subgroup-toggle">▼</span>
+    </div>
+    <div class="docs-subgroup-body">
+      <div class="docs-grid">
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/gvv508aivnb79sme9lgw8/pasap_pablo.pdf?rlkey=hnxvffrinz2xk86uazwxnkqac&st=1yk0dlbe&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">👨</div>
+          <div class="doc-info">
+            <div class="doc-name">Pasaporte Pablo</div>
+            <div class="doc-sub">PDF · Dropbox</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/rv541rsqpn6p8nha7t3d3/pasap_natalia.pdf?rlkey=35pgay1m85uj4mu2v2bhc8j1l&st=rf8o9i78&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">👩</div>
+          <div class="doc-info">
+            <div class="doc-name">Pasaporte Natalia</div>
+            <div class="doc-sub">PDF · Dropbox</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/yvgjgs45t0x880bk04l35/pasap_Luc-a.pdf?rlkey=hpnzemu4egdg72l6plxs67wuk&st=nbu1eigj&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">👧</div>
+          <div class="doc-info">
+            <div class="doc-name">Pasaporte Lucía</div>
+            <div class="doc-sub">PDF · Dropbox</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILLETES -->
+  <div class="docs-subgroup">
+    <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)">
+      <span class="docs-subgroup-emoji">🎟️</span>
+      <span class="docs-subgroup-title">Billetes de transporte</span>
+      <span class="docs-subgroup-toggle">▼</span>
+    </div>
+    <div class="docs-subgroup-body">
+      <div class="docs-grid">
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/2ldl1038goouz116bvyx9/billete_tren.pdf?rlkey=99tdj4o510jrusycdoqkci38u&st=me7g8gej&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🚂</div>
+          <div class="doc-info">
+            <div class="doc-name">Billetes de tren</div>
+            <div class="doc-sub">Alicante ↔ Madrid · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <div class="doc-card doc-empty" onclick="alert('Pendiente de añadir')">
+          <div class="doc-icon">✈️</div>
+          <div class="doc-info">
+            <div class="doc-name">Billetes de avión</div>
+            <div class="doc-sub">Pendiente de añadir</div>
+          </div>
+          <div class="doc-arrow">+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOTELES -->
+  <div class="docs-subgroup">
+    <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)">
+      <span class="docs-subgroup-emoji">🏨</span>
+      <span class="docs-subgroup-title">Hoteles</span>
+      <span class="docs-subgroup-toggle">▼</span>
+    </div>
+    <div class="docs-subgroup-body">
+      <div class="docs-grid">
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/1n7unkuj91sxl6xrorjcg/hotel-Barajas.pdf?rlkey=oh1yi508lxlheakysv3hy0lqq&st=jrtki7yd&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🏨</div>
+          <div class="doc-info">
+            <div class="doc-name">Hotel Barajas</div>
+            <div class="doc-sub">Apartamentos Deluxe Barajas · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/rm798529ivapv149trj52/hotel-Osaka.pdf?rlkey=wnlo3f3ggscrsh78ppnfqmgvi&st=tzxxc91g&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🏨</div>
+          <div class="doc-info">
+            <div class="doc-name">Hotel Osaka</div>
+            <div class="doc-sub">Sanctuary Residence Tennoji · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/aavkgql0lw6kq110tu34q/hotel-kioto.pdf?rlkey=d2dh5ydb61u0j46a55zkta4a9&st=azqaeddi&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🏨</div>
+          <div class="doc-info">
+            <div class="doc-name">Hotel Kioto</div>
+            <div class="doc-sub">Rest Inn Kioto · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/swnypfp8vbybh59ip5ea9/hotel-Tokio.pdf?rlkey=4suuxoz5x69dypc6u7r771pb3&st=ptfgtnpp&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🏨</div>
+          <div class="doc-info">
+            <div class="doc-name">Hotel Tokio</div>
+            <div class="doc-sub">Hotel Tokio · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/0m5037yax349djiog4mjx/HOTEL-NARA.pdf?rlkey=zpfsyqm9f8hmyr2evkan2mtu7&st=gtn5vlub&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🏨</div>
+          <div class="doc-info">
+            <div class="doc-name">Hotel Nara</div>
+            <div class="doc-sub">Haruya Naramachi · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTRADAS -->
+  <div class="docs-subgroup">
+    <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)">
+      <span class="docs-subgroup-emoji">🎫</span>
+      <span class="docs-subgroup-title">Entradas y actividades</span>
+      <span class="docs-subgroup-toggle">▼</span>
+    </div>
+    <div class="docs-subgroup-body">
+      <div class="docs-grid">
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/z2czw7dzbprxb19lkgivm/entradas-museo-ghibli.pdf?rlkey=3llzrjtdoaxlp21ewi6hat0xc&st=fdc37ydw&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🎫</div>
+          <div class="doc-info">
+            <div class="doc-name">Museo Ghibli</div>
+            <div class="doc-sub">Entradas · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/hcc1kj0v3gemgwe5fcjcr/Official-Ticket-Store-_-teamLab-Biovortex-Kyoto-Kyoto-Japan.mht?rlkey=7yf5l9efv7omqy7c6rr57gdla&st=22a7aja4&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🌀</div>
+          <div class="doc-info">
+            <div class="doc-name">teamLab Biovortex</div>
+            <div class="doc-sub">Entradas Kioto · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/ujs67l5zozql8lx636gc8/entradas-free-tour.pdf?rlkey=9vmw7xss7v0vehqj271onyuf7&st=2mt8tslg&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🚶</div>
+          <div class="doc-info">
+            <div class="doc-name">Free Tour Osaka</div>
+            <div class="doc-sub">Entradas · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <div class="doc-card doc-empty" onclick="alert('Pendiente de añadir')">
+          <div class="doc-icon">🎫</div>
+          <div class="doc-info">
+            <div class="doc-name">Más entradas</div>
+            <div class="doc-sub">Pendiente de añadir</div>
+          </div>
+          <div class="doc-arrow">+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+
+  <!-- ═══ ENLACES DE INTERÉS ═══ -->
+  <div class="day-card" style="margin-bottom:20px">
+    <div class="day-header transit" onclick="toggleDay(this)" style="cursor:pointer">
+      <div class="day-number transit-num">🔗</div>
+      <div class="day-info">
+        <div class="day-emoji"></div>
+        <h3>Enlaces de interés</h3>
+        <div class="day-date">Restaurantes y puntos de interés por ciudad</div>
+      </div>
+      <div class="day-toggle">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="docs-groups">
+
+        <!-- OSAKA -->
+        <div class="docs-subgroup">
+          <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="border-left:4px solid #e67e22">
+            <span class="docs-subgroup-emoji">🏯</span>
+            <span class="docs-subgroup-title" style="color:#e67e22">Osaka</span>
+            <span class="docs-subgroup-toggle">▼</span>
+          </div>
+          <div class="docs-subgroup-body">
+            <div class="docs-groups">
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#fff8f0">
+                  <span class="docs-subgroup-emoji">🍜</span>
+                  <span class="docs-subgroup-title">Restaurantes</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Takonotetsu <span style="font-weight:400;color:#888">· Takoyaki 🐙</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Uno de los locales de takoyaki más queridos de Osaka. Las bolas de pulpo son crujientes por fuera y cremosas por dentro. 12 piezas por 860¥ (~5€). Experiencia auténtica y precio inmejorable.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Takonotetsu+Osaka+Japan" id="link-osaka-rest-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-rest-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-rest-1"><a id="href-osaka-rest-1" href="https://www.google.com/maps/search/Takonotetsu+Osaka+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Takonotetsu+Osaka+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Daiki Suisan (Dotonbori) <span style="font-weight:400;color:#888">· Kaiten Sushi 🍣</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Uno de los mejores kaiten-sushi de Osaka. El sushi llega en cinta giratoria; platos desde 108¥. Ambiente animado en pleno Dotonbori. Calidad sorprendente para el precio.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Daiki+Suisan+Dotonbori+Osaka" id="link-osaka-rest-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-rest-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-rest-2"><a id="href-osaka-rest-2" href="https://www.google.com/maps/search/Daiki+Suisan+Dotonbori+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Daiki+Suisan+Dotonbori+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Kushikatsu Daruma <span style="font-weight:400;color:#888">· Kushikatsu 🍢</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El local más famoso de Osaka para kushikatsu (brochetas empanadas y fritas). Icónico, con la norma de oro: ¡no mojar dos veces en la salsa! Precios desde 100¥ por brocheta.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kushikatsu+Daruma+Osaka" id="link-osaka-rest-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-rest-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-rest-3"><a id="href-osaka-rest-3" href="https://www.google.com/maps/search/Kushikatsu+Daruma+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kushikatsu+Daruma+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Fukutaro <span style="font-weight:400;color:#888">· Okonomiyaki 🥞</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Referencia indiscutible del okonomiyaki en Osaka. Local tradicional con décadas de historia. El okonomiyaki estilo Osaka (mezclado) es su especialidad. Precio medio 900-1.200¥.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Fukutaro+Okonomiyaki+Osaka" id="link-osaka-rest-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-rest-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-rest-4"><a id="href-osaka-rest-4" href="https://www.google.com/maps/search/Fukutaro+Okonomiyaki+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Fukutaro+Okonomiyaki+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#f0f6ff">
+                  <span class="docs-subgroup-emoji">📍</span>
+                  <span class="docs-subgroup-title">Puntos de interés</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Castillo de Osaka <span style="font-weight:400;color:#888">· Castillo 🏯</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El símbolo de Osaka. El parque que lo rodea es gratuito y espectacular, especialmente con los cerezos en flor. La entrada al interior del castillo cuesta 600¥. Mejor visitarlo temprano por la mañana.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Osaka+Castle+Japan" id="link-osaka-poi-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-1"><a id="href-osaka-poi-1" href="https://www.google.com/maps/search/Osaka+Castle+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Osaka+Castle+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Dotonbori <span style="font-weight:400;color:#888">· Barrio 🏮</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El corazón vibrante de Osaka. Canal rodeado de letreros de neón gigantes, restaurantes de street food y el famoso cartel de Glico. El mejor lugar para probar takoyaki, ramen y okonomiyaki a cualquier hora.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Dotonbori+Osaka" id="link-osaka-poi-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-2"><a id="href-osaka-poi-2" href="https://www.google.com/maps/search/Dotonbori+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Dotonbori+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Mercado Kuromon <span style="font-weight:400;color:#888">· Mercado 🐟</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Conocido como "la cocina de Osaka", este mercado cubierto de 600 metros tiene más de 170 puestos de mariscos frescos, frutas exóticas y comida callejera. Abre desde las 9h. Entrada gratuita.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kuromon+Market+Osaka" id="link-osaka-poi-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-3"><a id="href-osaka-poi-3" href="https://www.google.com/maps/search/Kuromon+Market+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kuromon+Market+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Templo Shitennoji <span style="font-weight:400;color:#888">· Templo 🛕</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El templo budista más antiguo de Japón, fundado en el año 593. Entrada gratuita al recinto exterior. El jardín interior cuesta 300¥. Una joya histórica en medio de la ciudad moderna.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Shitennoji+Temple+Osaka" id="link-osaka-poi-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-4"><a id="href-osaka-poi-4" href="https://www.google.com/maps/search/Shitennoji+Temple+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Shitennoji+Temple+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Santuario Yasaka Namba <span style="font-weight:400;color:#888">· Santuario ⛩️</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Santuario sintoísta famoso por su impresionante cabeza de dragón gigante. Imprescindible verlo en persona. Sorprende el contraste de paz espiritual a solo metros del caos de Dotonbori. Entrada gratuita.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Namba+Yasaka+Shrine+Osaka" id="link-osaka-poi-5" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-5')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-5"><a id="href-osaka-poi-5" href="https://www.google.com/maps/search/Namba+Yasaka+Shrine+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Namba+Yasaka+Shrine+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Shinsekai <span style="font-weight:400;color:#888">· Barrio retro 🗼</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Barrio vintage de Osaka con la Torre Tsutenkaku (300¥ de entrada) y ambiente de los años 50. Sus calles están llenas de restaurantes de kushikatsu y tiendas de recuerdos. Muy fotogénico.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Shinsekai+Osaka" id="link-osaka-poi-6" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('osaka-poi-6')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-osaka-poi-6"><a id="href-osaka-poi-6" href="https://www.google.com/maps/search/Shinsekai+Osaka" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Shinsekai+Osaka','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- NARA -->
+        <div class="docs-subgroup">
+          <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="border-left:4px solid #27ae60">
+            <span class="docs-subgroup-emoji">🦌</span>
+            <span class="docs-subgroup-title" style="color:#27ae60">Nara</span>
+            <span class="docs-subgroup-toggle">▼</span>
+          </div>
+          <div class="docs-subgroup-body">
+            <div class="docs-groups">
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#fff8f0">
+                  <span class="docs-subgroup-emoji">🍜</span>
+                  <span class="docs-subgroup-title">Restaurantes</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Nakatanidou <span style="font-weight:400;color:#888">· Mochi 🍡</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Famosísimo por su mochi de ajenjo (yomogi mochi) hecho a mano en directo en la puerta del local. El espectáculo del machacado es imprescindible. Económico y delicioso.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Nakatanidou+Nara+Japan" id="link-nara-rest-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-rest-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-rest-1"><a id="href-nara-rest-1" href="https://www.google.com/maps/search/Nakatanidou+Nara+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Nakatanidou+Nara+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Kameya <span style="font-weight:400;color:#888">· Okonomiyaki 🥞</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Local familiar muy recomendado por los viajeros para probar un okonomiyaki tradicional en Nara. Buen precio y ambiente local auténtico.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kameya+okonomiyaki+Nara+Japan" id="link-nara-rest-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-rest-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-rest-2"><a id="href-nara-rest-2" href="https://www.google.com/maps/search/Kameya+okonomiyaki+Nara+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kameya+okonomiyaki+Nara+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Mugi-no-kura Udon <span style="font-weight:400;color:#888">· Udon 🍜</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Estupenda relación calidad-precio para comer udon cerca del parque de Nara. Ambiente rústico acogedor y fideos caseros en un caldo suave. Platos desde 600¥.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Mugi+no+kura+Udon+Nara+Japan" id="link-nara-rest-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-rest-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-rest-3"><a id="href-nara-rest-3" href="https://www.google.com/maps/search/Mugi+no+kura+Udon+Nara+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Mugi+no+kura+Udon+Nara+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Maguro Koya <span style="font-weight:400;color:#888">· Japonesa / Atún 🐟</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Con más de 460 valoraciones positivas en TripAdvisor, es uno de los restaurantes mejor puntuados de Nara. Especialidad en atún fresco a precio razonable.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Maguro+Koya+Nara+Japan" id="link-nara-rest-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-rest-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-rest-4"><a id="href-nara-rest-4" href="https://www.google.com/maps/search/Maguro+Koya+Nara+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Maguro+Koya+Nara+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#f0f6ff">
+                  <span class="docs-subgroup-emoji">📍</span>
+                  <span class="docs-subgroup-title">Puntos de interés</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Parque de Nara <span style="font-weight:400;color:#888">· Parque 🦌</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Más de 1.200 ciervos sagrados viven libres por el parque. Se pueden comprar galletas "shika senbei" (150¥) para darles de comer. El parque es gratuito y ocupa el centro histórico de Nara.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Nara+Park+Japan" id="link-nara-poi-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-poi-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-poi-1"><a id="href-nara-poi-1" href="https://www.google.com/maps/search/Nara+Park+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Nara+Park+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Templo Todai-ji <span style="font-weight:400;color:#888">· Templo 🛕</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Alberga el Daibutsu, la estatua de Buda de bronce más grande del mundo (15m). El edificio principal es el mayor de madera del mundo. Entrada 600¥. Abre de 8:00 a 17:00h.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Todaiji+Temple+Nara" id="link-nara-poi-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-poi-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-poi-2"><a id="href-nara-poi-2" href="https://www.google.com/maps/search/Todaiji+Temple+Nara" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Todaiji+Temple+Nara','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Santuario Kasuga Taisha <span style="font-weight:400;color:#888">· Santuario ⛩️</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Declarado Patrimonio de la Humanidad. Más de 3.000 farolillos de piedra y bronce iluminan el camino entre cedros centenarios. Entrada 600¥. Especialmente mágico al amanecer.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kasuga+Taisha+Shrine+Nara" id="link-nara-poi-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-poi-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-poi-3"><a id="href-nara-poi-3" href="https://www.google.com/maps/search/Kasuga+Taisha+Shrine+Nara" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kasuga+Taisha+Shrine+Nara','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Templo Kofuku-ji <span style="font-weight:400;color:#888">· Templo 🛕</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Su pagoda de cinco pisos (50,1m) es el segundo edificio más alto de madera de Japón y el símbolo de Nara. Cuatro de sus edificios son Tesoro Nacional. Visible gratis desde el exterior.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kofukuji+Temple+Nara" id="link-nara-poi-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-poi-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-poi-4"><a id="href-nara-poi-4" href="https://www.google.com/maps/search/Kofukuji+Temple+Nara" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kofukuji+Temple+Nara','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Naramachi <span style="font-weight:400;color:#888">· Barrio histórico 🏘️</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Encantador barrio de casas mercantiles (machiya) de la era Edo. Calles tranquilas perfectas para pasear, tomar té con dulces y comprar los famosos amuletos migawari-zaru. Entrada gratuita.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Naramachi+Nara+Japan" id="link-nara-poi-5" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('nara-poi-5')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-nara-poi-5"><a id="href-nara-poi-5" href="https://www.google.com/maps/search/Naramachi+Nara+Japan" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Naramachi+Nara+Japan','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- KIOTO -->
+        <div class="docs-subgroup">
+          <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="border-left:4px solid #2980b9">
+            <span class="docs-subgroup-emoji">⛩️</span>
+            <span class="docs-subgroup-title" style="color:#2980b9">Kioto</span>
+            <span class="docs-subgroup-toggle">▼</span>
+          </div>
+          <div class="docs-subgroup-body">
+            <div class="docs-groups">
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#fff8f0">
+                  <span class="docs-subgroup-emoji">🍜</span>
+                  <span class="docs-subgroup-title">Restaurantes</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Musashi Sushi Sanjo <span style="font-weight:400;color:#888">· Sushi 🍣</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Más de 1.000 valoraciones en TripAdvisor y precio de escándalo. Sushi fresco en cinta giratoria en pleno centro de Kioto. Platos desde 130¥. Uno de los favoritos de los viajeros.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Musashi+Sushi+Sanjo+Kyoto" id="link-kioto-rest-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-rest-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-rest-1"><a id="href-kioto-rest-1" href="https://www.google.com/maps/search/Musashi+Sushi+Sanjo+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Musashi+Sushi+Sanjo+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Ramen Sen No Kaze <span style="font-weight:400;color:#888">· Ramen 🍜</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Local pequeño y acogedor con ramen auténtico desde 1.100¥. Tienen menús completos con gyozas incluidas. Muy bien valorado por locales y viajeros por igual.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Ramen+Sen+no+Kaze+Kyoto" id="link-kioto-rest-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-rest-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-rest-2"><a id="href-kioto-rest-2" href="https://www.google.com/maps/search/Ramen+Sen+no+Kaze+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Ramen+Sen+no+Kaze+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Okonomiyaki Katsu <span style="font-weight:400;color:#888">· Okonomiyaki 🥞</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Local familiar pequeño considerado el mejor okonomiyaki de Kioto. El de cerdo y el de calamar desde solo 750-800¥. Sin pretensiones, pero con un sabor excepcional.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Okonomiyaki+Katsu+Kyoto" id="link-kioto-rest-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-rest-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-rest-3"><a id="href-kioto-rest-3" href="https://www.google.com/maps/search/Okonomiyaki+Katsu+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Okonomiyaki+Katsu+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Kyo Horumon Kura <span style="font-weight:400;color:#888">· Yakiniku 🥩</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Especializado en yakiniku (carne a la parrilla). Menú del mediodía de 800-1.400¥ que incluye carne, arroz, sopa y encurtidos. Ambiente local con mesitas de madera y té gratis.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kyo+Horumon+Kura+Kyoto" id="link-kioto-rest-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-rest-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-rest-4"><a id="href-kioto-rest-4" href="https://www.google.com/maps/search/Kyo+Horumon+Kura+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kyo+Horumon+Kura+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#f0f6ff">
+                  <span class="docs-subgroup-emoji">📍</span>
+                  <span class="docs-subgroup-title">Puntos de interés</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Fushimi Inari Taisha <span style="font-weight:400;color:#888">· Santuario ⛩️</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El santuario de los 10.000 torii naranjas que suben por la montaña Inari. Uno de los lugares más fotogénicos de Japón. Gratis, abierto 24h. Cuanto más subes, menos gente. Vale la pena madrugar.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Fushimi+Inari+Taisha+Kyoto" id="link-kioto-poi-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-1"><a id="href-kioto-poi-1" href="https://www.google.com/maps/search/Fushimi+Inari+Taisha+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Fushimi+Inari+Taisha+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Kinkaku-ji (Pabellón de Oro) <span style="font-weight:400;color:#888">· Templo 🥇</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El templo cubierto de pan de oro que se refleja en el estanque es uno de los iconos de Japón. Entrada 500¥. Impresionante en cualquier estación. Se recomienda llegar antes de las 9h para evitar aglomeraciones.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kinkakuji+Kyoto" id="link-kioto-poi-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-2"><a id="href-kioto-poi-2" href="https://www.google.com/maps/search/Kinkakuji+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kinkakuji+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Bosque de bambú de Arashiyama <span style="font-weight:400;color:#888">· Naturaleza 🎋</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Paseo entre bambúes gigantes de varios kilómetros que crean un efecto visual y sonoro único. Completamente gratuito. El barrio de Arashiyama también alberga el bello templo Tenryu-ji (500¥).</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Arashiyama+Bamboo+Grove+Kyoto" id="link-kioto-poi-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-3"><a id="href-kioto-poi-3" href="https://www.google.com/maps/search/Arashiyama+Bamboo+Grove+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Arashiyama+Bamboo+Grove+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Kiyomizu-dera <span style="font-weight:400;color:#888">· Templo 🛕</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El "templo del agua pura" construido en 778 sobre una colina con vistas panorámicas de Kioto. Su terraza de madera sin clavos es asombrosa. Entrada 500¥. Las calles de Ninenzaka y Sannenzaka que suben son preciosas.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Kiyomizudera+Temple+Kyoto" id="link-kioto-poi-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-4"><a id="href-kioto-poi-4" href="https://www.google.com/maps/search/Kiyomizudera+Temple+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Kiyomizudera+Temple+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Gion <span style="font-weight:400;color:#888">· Barrio geishas 🌸</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El barrio más tradicional de Kioto, famoso por sus casas de té (ochaya) y por ser el hogar de las geishas. Las calles Hanamikoji y Shirakawa son imprescindibles al atardecer. Acceso gratuito.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Gion+district+Kyoto" id="link-kioto-poi-5" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-5')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-5"><a id="href-kioto-poi-5" href="https://www.google.com/maps/search/Gion+district+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Gion+district+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Castillo Nijo <span style="font-weight:400;color:#888">· Castillo 🏯</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Palacio-fortaleza del shogunado Tokugawa, declarado Patrimonio de la Humanidad. Sus famosos "suelos de ruiseñor" crujen al caminar para alertar de intrusos. Entrada 1.030¥. Los jardines son espectaculares.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Nijo+Castle+Kyoto" id="link-kioto-poi-6" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('kioto-poi-6')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-kioto-poi-6"><a id="href-kioto-poi-6" href="https://www.google.com/maps/search/Nijo+Castle+Kyoto" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Nijo+Castle+Kyoto','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- TOKIO -->
+        <div class="docs-subgroup">
+          <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="border-left:4px solid #c0392b">
+            <span class="docs-subgroup-emoji">🗼</span>
+            <span class="docs-subgroup-title" style="color:#c0392b">Tokio</span>
+            <span class="docs-subgroup-toggle">▼</span>
+          </div>
+          <div class="docs-subgroup-body">
+            <div class="docs-groups">
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#fff8f0">
+                  <span class="docs-subgroup-emoji">🍜</span>
+                  <span class="docs-subgroup-title">Restaurantes</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Ichiran Ramen <span style="font-weight:400;color:#888">· Ramen 🍜</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El ramen más famoso de Japón. Se come en cabinas individuales para concentrarse en el sabor. Caldo de cerdo tonkotsu perfecto. Precio ~1.000¥. Imprescindible en Tokio.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Ichiran+Ramen+Tokyo" id="link-tokio-rest-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-rest-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-rest-1"><a id="href-tokio-rest-1" href="https://www.google.com/maps/search/Ichiran+Ramen+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Ichiran+Ramen+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Yoshinoya <span style="font-weight:400;color:#888">· Gyudon 🍚</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Cadena japonesa de referencia para el gyudon: cuenco de arroz con ternera y cebolla en salsa dulce. El más económico de Tokio, desde 400¥. Abierto 24h, perfecto para cualquier hora.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Yoshinoya+Tokyo" id="link-tokio-rest-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-rest-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-rest-2"><a id="href-tokio-rest-2" href="https://www.google.com/maps/search/Yoshinoya+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Yoshinoya+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ CoCo Ichibanya <span style="font-weight:400;color:#888">· Curry japonés 🍛</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">La cadena de curry japonés más popular del país. Puedes personalizar el nivel de picante y los ingredientes. Precio medio 900¥. Tienen locales por todo Tokio.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/CoCo+Ichibanya+Tokyo" id="link-tokio-rest-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-rest-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-rest-3"><a id="href-tokio-rest-3" href="https://www.google.com/maps/search/CoCo+Ichibanya+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/CoCo+Ichibanya+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">🍽️ Shodai Ebisu <span style="font-weight:400;color:#888">· Japonesa tradicional 🏮</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Restaurante con muy buenas valoraciones en Shibuya. Cocina japonesa tradicional a buen precio, con precio medio de 10-15€ por persona. Ambiente local y auténtico.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Shodai+Ebisu+Shibuya+Tokyo" id="link-tokio-rest-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-rest-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-rest-4"><a id="href-tokio-rest-4" href="https://www.google.com/maps/search/Shodai+Ebisu+Shibuya+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Shodai+Ebisu+Shibuya+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="docs-subgroup">
+                <div class="docs-subgroup-header" onclick="toggleDocsGroup(this)" style="background:#f0f6ff">
+                  <span class="docs-subgroup-emoji">📍</span>
+                  <span class="docs-subgroup-title">Puntos de interés</span>
+                  <span class="docs-subgroup-toggle">▼</span>
+                </div>
+                <div class="docs-subgroup-body">
+                  <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Templo Senso-ji (Asakusa) <span style="font-weight:400;color:#888">· Templo 🛕</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El templo más antiguo y visitado de Tokio. La entrada por la Kaminarimon (Puerta del Trueno) con su farolillo rojo gigante es uno de los iconos del Japón. La calle Nakamise tiene 90 tiendas de souvenirs. Gratis.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Senso-ji+Temple+Asakusa+Tokyo" id="link-tokio-poi-1" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-1')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-1"><a id="href-tokio-poi-1" href="https://www.google.com/maps/search/Senso-ji+Temple+Asakusa+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Senso-ji+Temple+Asakusa+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Cruce de Shibuya <span style="font-weight:400;color:#888">· Lugar icónico 🚦</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El cruce peatonal más transitado del mundo: hasta 3.000 personas lo cruzan simultáneamente en cada verde. Espectacular visto desde el café Starbucks o desde el mirador Shibuya Sky. Gratis (mirador 2.000¥).</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Shibuya+Crossing+Tokyo" id="link-tokio-poi-2" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-2')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-2"><a id="href-tokio-poi-2" href="https://www.google.com/maps/search/Shibuya+Crossing+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Shibuya+Crossing+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Tokyo Skytree <span style="font-weight:400;color:#888">· Torre 🗼</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">La torre más alta de Japón con 634m. Dos miradores: el Tembo Deck (2.100¥) a 350m y el Tembo Galleria (3.100¥) a 450m. Vistas de 360° de Tokio. Se puede combinar con el barrio de Asakusa al lado.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Tokyo+Skytree" id="link-tokio-poi-3" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-3')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-3"><a id="href-tokio-poi-3" href="https://www.google.com/maps/search/Tokyo+Skytree" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Tokyo+Skytree','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Santuario Meiji <span style="font-weight:400;color:#888">· Santuario ⛩️</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">Tranquilo santuario sintoísta en pleno corazón de Tokio, rodeado de un bosque de 70.000 árboles. Dedicado al Emperador Meiji. Entrada gratuita. Perfecto para desconectar del ruido de la ciudad.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Meiji+Shrine+Tokyo" id="link-tokio-poi-4" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-4')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-4"><a id="href-tokio-poi-4" href="https://www.google.com/maps/search/Meiji+Shrine+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Meiji+Shrine+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Parque Ueno <span style="font-weight:400;color:#888">· Parque 🌸</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El parque más grande de Tokio y uno de los mejores de Japón para ver cerezos en flor en abril. Alberga 5 museos, un zoo y varios templos. La mayoría de museos desde 600¥. El parque es gratuito.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Ueno+Park+Tokyo" id="link-tokio-poi-5" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-5')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-5"><a id="href-tokio-poi-5" href="https://www.google.com/maps/search/Ueno+Park+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Ueno+Park+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+              <div class="link-box resto-prefilled">
+                <div class="link-label">📍 Akihabara <span style="font-weight:400;color:#888">· Barrio electrónica 🎮</span></div>
+                <p style="font-size:0.85em;color:#555;margin:6px 0 10px;line-height:1.6">El paraíso del anime, manga, videojuegos y electrónica. Tiendas de varios pisos con figuras, consolas, gadgets y cafés temáticos. Ambiente único y muy fotogénico. Ideal para Lucía si le gusta el anime.</p>
+                <div class="link-input-row">
+                  <input class="link-input" type="url" value="https://www.google.com/maps/search/Akihabara+Tokyo" id="link-tokio-poi-6" style="font-size:0.82em" />
+                  <button class="link-btn" onclick="saveEnlace('tokio-poi-6')">💾</button>
+                </div>
+                <div class="link-saved show" id="saved-tokio-poi-6"><a id="href-tokio-poi-6" href="https://www.google.com/maps/search/Akihabara+Tokyo" class="link-view" onclick="event.preventDefault();window.open('https://www.google.com/maps/search/Akihabara+Tokyo','_blank')">🗺️ Ver en Google Maps</a></div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ITINERARIO ═══ -->
+  <div class="section-title">🗓️ Itinerario día a día</div>
+
+  <!-- GRUPO: TRÁNSITO DE IDA -->
+  <div class="city-group" id="grupo-transito-ida">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #e2e3e5, #ffffff); border-left: 5px solid #6c757d">
+      <div class="city-group-emoji">🚂✈️</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#6c757d">Tránsito de ida</div>
+        <div class="city-group-sub">Alicante → Madrid → Osaka</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 0 -->
+      <div class="day-card">
+        <div class="day-header transit" onclick="toggleDay(this)">
+          <div class="day-number transit-num">0</div>
+          <div class="day-info">
+            <div class="day-emoji">🚂</div>
+            <h3>Alicante → Madrid</h3>
+            <div class="day-date">Martes, 7 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚆 Transporte</h4>
+            <ul class="info-list">
+              <li>Tren Alicante → Madrid (RENFE)</li>
+              <li>Llegada a Madrid por la noche — alojamiento antes del vuelo</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>🏨 Hotel — Madrid (noche previa al vuelo)</h4>
+            <ul class="info-list">
+              <li><strong>Apartamentos Deluxe Barajas</strong></li>
+              <li>Alojamiento noche del 7 al 8 de Abril</li>
+              <li>Cerca del Aeropuerto de Madrid-Barajas (T4) — ideal para el vuelo del día siguiente</li>
+            </ul>
+            <div class="checkin-row" style="margin-top:8px">
+              <span class="checkin-chip">🛎️ Check-in: Martes 7 — noche</span>
+              <span class="checkin-chip">🏁 Check-out: Miércoles 8 — madrugada/mañana</span>
+            </div>
+            <div style="height:10px"></div>
+            <div class="link-box">
+              <div class="link-label">📍 Google Maps — Apartamentos Deluxe Barajas</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://maps.app.goo.gl/EYMawhXwmfv2BSJG8" id="link-hotel-madrid" />
+                <button class="link-btn" onclick="saveLink('hotel-madrid')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-hotel-madrid">✅ Enlace guardado — <a id="href-hotel-madrid" href="https://maps.app.goo.gl/EYMawhXwmfv2BSJG8" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/EYMawhXwmfv2BSJG8','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+            <div style="height:8px"></div>
+            <div class="link-box">
+              <div class="link-label">🎟️ Reserva del apartamento</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a la reserva (Booking, Airbnb...)" id="link-reserva-madrid" />
+                <button class="link-btn" onclick="saveLink('reserva-madrid')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-reserva-madrid">✅ Guardado — <a id="href-reserva-madrid" href="#" target="_blank" class="link-view">🔗 Ver reserva</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d0" placeholder="Notas del día 0 — tren a Madrid y alojamiento en Barajas..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 1 -->
+      <div class="day-card">
+        <div class="day-header transit" onclick="toggleDay(this)">
+          <div class="day-number transit-num">1</div>
+          <div class="day-info">
+            <div class="day-emoji">✈️</div>
+            <h3>Madrid → Osaka</h3>
+            <div class="day-date">Miércoles, 8 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>✈️ Vuelo</h4>
+            <ul class="info-list">
+              <li>Vuelo Madrid (MAD) → Osaka Kansai (KIX) — duración aprox. 11 horas</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>🔗 Enlace al vuelo / entrada</h4>
+            <div class="link-box">
+              <div class="link-label">🎫 Reserva / Billete de avión</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Pega aquí el enlace de la reserva de vuelo..." id="link-d1-vuelo" />
+                <button class="link-btn" onclick="saveLink('d1-vuelo')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-d1-vuelo">✅ Enlace guardado — <a id="href-d1-vuelo" href="#" target="_blank" class="link-view">🔗 Abrir enlace</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d1" placeholder="Notas del día 1..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: OSAKA -->
+  <div class="city-group" id="grupo-osaka">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #fff3cd, #ffffff); border-left: 5px solid #e67e22">
+      <div class="city-group-emoji">🏯</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#e67e22">Osaka</div>
+        <div class="city-group-sub">Días 2, 3 y 4 · 09 – 11 Abril</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 2 -->
+      <div class="day-card">
+        <div class="day-header osaka" onclick="toggleDay(this)">
+          <div class="day-number osaka-num">2</div>
+          <div class="day-info">
+            <div class="day-emoji">🛬</div>
+            <h3>Llegada a Osaka</h3>
+            <div class="day-date">Jueves, 9 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚆 Desde el Aeropuerto de Kansai</h4>
+            <div>
+              <span class="transport-badge">🚄 Haruka Express (JR Pass) — 40-50 min a Shin-Osaka</span>
+              <span class="transport-badge">🚄 Nankai Rapi:t — 45-50 min a Namba</span>
+              <span class="transport-badge">🚌 Limousine Bus — hasta Umeda / Shin-Osaka</span>
+              <span class="transport-badge">🚆 JR Kansai Airport Rapid — opción más económica</span>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🏨 Hotel — Osaka</h4>
+            <ul class="info-list">
+              <li><strong>Sanctuary Residence Tennojikoenminami</strong> (Uehommachi Tennoji, Sur de Osaka)</li>
+              <li>Metro Dobutsuen-mae: 700 m</li>
+              <li>Metro Abeno: 1 km</li>
+              <li>Tren Shin-Imamiya: 1,1 km</li>
+              <li>Estación de tren Tennoji: 1,3 km</li>
+            </ul>
+            <div style="height:10px"></div>
+            <div class="link-box">
+              <div class="link-label">📍 Google Maps — Hotel Osaka</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://goo.gl/maps/KPJHeHzvGiMMv9719" id="link-hotel-osaka" />
+                <button class="link-btn" onclick="saveLink('hotel-osaka')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-hotel-osaka">✅ Enlace guardado — <a id="href-hotel-osaka" href="https://goo.gl/maps/KPJHeHzvGiMMv9719" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://goo.gl/maps/KPJHeHzvGiMMv9719','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d2" placeholder="Notas del día 2..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 3 -->
+      <div class="day-card">
+        <div class="day-header osaka" onclick="toggleDay(this)">
+          <div class="day-number osaka-num">3</div>
+          <div class="day-info">
+            <div class="day-emoji">🚶</div>
+            <h3>Osaka — Free Tour</h3>
+            <div class="day-date">Viernes, 10 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚶 Free Tour por Osaka</h4>
+            <ul class="info-list">
+              <li>🕑 Hora de inicio: <strong>14:00 h</strong></li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>📍 Punto de inicio</h4>
+            <div class="link-box">
+              <div class="link-label">🗺️ Google Maps — Punto de inicio del Free Tour</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://goo.gl/maps/NVKUCtcSF6f6gM8C8" id="link-freetour-osaka-maps" />
+                <button class="link-btn" onclick="saveLink('freetour-osaka-maps')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-freetour-osaka-maps">✅ Enlace guardado — <a id="href-freetour-osaka-maps" href="https://goo.gl/maps/NVKUCtcSF6f6gM8C8" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://goo.gl/maps/NVKUCtcSF6f6gM8C8','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Free Tour Osaka (PDF Dropbox)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://www.dropbox.com/scl/fi/ujs67l5zozql8lx636gc8/entradas-free-tour.pdf?rlkey=9vmw7xss7v0vehqj271onyuf7&st=2mt8tslg&dl=0" id="link-freetour-osaka-entrada" />
+                <button class="link-btn" onclick="saveLink('freetour-osaka-entrada')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-freetour-osaka-entrada">✅ Guardado — <a id="href-freetour-osaka-entrada" href="https://www.dropbox.com/scl/fi/ujs67l5zozql8lx636gc8/entradas-free-tour.pdf?rlkey=9vmw7xss7v0vehqj271onyuf7&st=2mt8tslg&dl=0" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://www.dropbox.com/scl/fi/ujs67l5zozql8lx636gc8/entradas-free-tour.pdf?rlkey=9vmw7xss7v0vehqj271onyuf7&st=2mt8tslg&dl=0','_blank')">🎫 Ver entradas</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d3" placeholder="Notas del día 3 — Free Tour Osaka..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 4 -->
+      <div class="day-card">
+        <div class="day-header osaka" onclick="toggleDay(this)">
+          <div class="day-number osaka-num">4</div>
+          <div class="day-info">
+            <div class="day-emoji">🦙</div>
+            <h3>Osaka</h3>
+            <div class="day-date">Sábado, 11 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🎫 Entradas / Eventos</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Día 4 — Osaka</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a entrada..." id="link-d4-entrada1" />
+                <button class="link-btn" onclick="saveLink('d4-entrada1')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-d4-entrada1">✅ Enlace guardado — <a id="href-d4-entrada1" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d4" placeholder="Notas del día 4 en Osaka..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: NARA -->
+  <div class="city-group" id="grupo-nara">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #d4edda, #ffffff); border-left: 5px solid #27ae60">
+      <div class="city-group-emoji">🦌</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#27ae60">Nara</div>
+        <div class="city-group-sub">Día 5 · 12 Abril</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 5 -->
+      <div class="day-card">
+        <div class="day-header nara" onclick="toggleDay(this)">
+          <div class="day-number nara-num">5</div>
+          <div class="day-info">
+            <div class="day-emoji">🦌</div>
+            <h3>Osaka → Nara</h3>
+            <div class="day-date">Domingo, 12 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚆 Trayecto Osaka → Nara</h4>
+            <div>
+              <span class="transport-badge">🚄 JR Yamatoji Line — 50 min desde JR Osaka</span>
+              <span class="transport-badge">🚄 Kintetsu Limited Express — 35 min · 1.280 ¥</span>
+              <span class="transport-badge">🚄 Kintetsu Express — 45 min · 760 ¥</span>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🏨 Hotel — Nara</h4>
+            <ul class="info-list">
+              <li><strong>Haruya Naramachi</strong> — Minamibukurocho 31-4, Nara</li>
+              <li>A 10-15 min a pie de las paradas de tren</li>
+              <li>A 15-20 min del Parque de Nara</li>
+            </ul>
+            <div class="checkin-row" style="margin-top:8px">
+              <span class="checkin-chip">🛎️ Check-in: Domingo 12 — 16:00 h</span>
+              <span class="checkin-chip">🏁 Check-out: Lunes 13 — 10:00 h</span>
+            </div>
+            <div style="height:10px"></div>
+            <div class="link-box">
+              <div class="link-label">📍 Google Maps — Hotel Nara (Haruya Naramachi)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA" id="link-hotel-nara" />
+                <button class="link-btn" onclick="saveLink('hotel-nara')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-hotel-nara">✅ Enlace guardado — <a id="href-hotel-nara" href="https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🏛️ Qué ver en Nara</h4>
+            <div class="attraction-item">
+              <div class="attraction-num">1</div>
+              <div class="attraction-content">
+                <div class="attraction-name">Parque de Nara · Todai-ji Nandaimon</div>
+                <div class="attraction-desc">La Gran Puerta Sur del templo Todai-ji. Punto de encuentro con los ciervos sagrados libres por el parque.</div>
+                <div class="attraction-meta"><span class="meta-badge">🦌 Ciervos libres</span></div>
+              </div>
+            </div>
+            <div class="attraction-item">
+              <div class="attraction-num">2</div>
+              <div class="attraction-content">
+                <div class="attraction-name">Templo Todai-ji</div>
+                <div class="attraction-desc">Alberga el Daibutsu, una estatua de Buda de 15 m de altura, una de las más grandes de Japón.</div>
+                <div class="attraction-meta"><span class="meta-badge">💰 600 ¥</span><span class="meta-badge">🕗 08:00 – 17:00</span></div>
+              </div>
+            </div>
+            <div class="attraction-item">
+              <div class="attraction-num">3</div>
+              <div class="attraction-content">
+                <div class="attraction-name">Santuario Kasuga Taisha</div>
+                <div class="attraction-desc">Santuario sintoísta decorado con más de 1.000 farolillos de piedra y bronce. Uno de los más antiguos de Japón.</div>
+                <div class="attraction-meta"><span class="meta-badge">💰 600 ¥</span><span class="meta-badge">🕗 06:00 – 18:00</span></div>
+              </div>
+            </div>
+            <div class="attraction-item">
+              <div class="attraction-num">4</div>
+              <div class="attraction-content">
+                <div class="attraction-name">Templo Kōfuku-ji</div>
+                <div class="attraction-desc">Cuatro edificios declarados Tesoro Nacional: pagoda de cinco pisos, pagoda de tres pisos, Hokuendo y Tokondo.</div>
+              </div>
+            </div>
+            <div class="attraction-item">
+              <div class="attraction-num">5</div>
+              <div class="attraction-content">
+                <div class="attraction-name">Naramachi</div>
+                <div class="attraction-desc">Barrio histórico para pasear y probar kakinoha-zushi. Casas Machiya Koshi-no-Ie y residencia Imanishike Shoin.</div>
+                <div class="attraction-meta"><span class="meta-badge">🍵 Té con dulces</span><span class="meta-badge">🐒 Amuleto migawari-zaru</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entrada Templo Todai-ji</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace reserva / compra entrada Todai-ji..." id="link-nara-todaiji" />
+                <button class="link-btn" onclick="saveLink('nara-todaiji')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-nara-todaiji">✅ Guardado — <a id="href-nara-todaiji" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+            <div style="height:8px"></div>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entrada Kasuga Taisha</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace reserva / compra entrada Kasuga Taisha..." id="link-nara-kasuga" />
+                <button class="link-btn" onclick="saveLink('nara-kasuga')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-nara-kasuga">✅ Guardado — <a id="href-nara-kasuga" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🍜 Restaurantes recomendados</h4>
+            <div class="resto-grid">
+              <div class="resto-card">
+                <div class="resto-name">Surugamachi's Okonomiyakiya</div>
+                <div class="resto-type">Okonomiyaki</div>
+                <div class="resto-detail">¥800–900 · Todos los días 12–15h y 17–21h</div>
+              </div>
+              <div class="resto-card">
+                <div class="resto-name">Tonkatsu Ganko Nara</div>
+                <div class="resto-type">Tonkatsu</div>
+                <div class="resto-detail">¥880–1.180 · 19 Higashimuki Nakamachi · 11–21h</div>
+              </div>
+              <div class="resto-card">
+                <div class="resto-name">Mizuya Chaya</div>
+                <div class="resto-type">Udon</div>
+                <div class="resto-detail">¥550–850 · 30 Kasuganocho · 11–15:30h (cerrado miérc.)</div>
+              </div>
+              <div class="resto-card">
+                <div class="resto-name">Soba-dokoro Kitahara</div>
+                <div class="resto-type">Soba</div>
+                <div class="resto-detail">¥950–1.600 · 50 Suimoncho · 11–15h (cerrado martes)</div>
+              </div>
+              <div class="resto-card">
+                <div class="resto-name">Takumi</div>
+                <div class="resto-type">Okonomiyaki</div>
+                <div class="resto-detail">¥850–1.250 · 485 Sanjocho · 12–19h (cerr. dom. y lun.)</div>
+              </div>
+              <div class="resto-card">
+                <div class="resto-name">Melon de Melon</div>
+                <div class="resto-type">Meronpan 🍈</div>
+                <div class="resto-detail">¥250 · 30-1 Shimosanjocho · 10–19h todos los días</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d5" placeholder="Notas del día 5 — Osaka a Nara..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: KIOTO -->
+  <div class="city-group" id="grupo-kioto">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #d1ecf1, #ffffff); border-left: 5px solid #2980b9">
+      <div class="city-group-emoji">⛩️</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#2980b9">Kioto</div>
+        <div class="city-group-sub">Días 6, 7, 8 y 9 · 13 – 16 Abril</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 6 -->
+      <div class="day-card">
+        <div class="day-header kioto" onclick="toggleDay(this)">
+          <div class="day-number kioto-num">6</div>
+          <div class="day-info">
+            <div class="day-emoji">⛩️</div>
+            <h3>Nara → Kioto</h3>
+            <div class="day-date">Lunes, 13 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚆 Trayecto Nara → Kioto (30-50 min)</h4>
+            <div>
+              <span class="transport-badge">🚄 Kintetsu — 35-45 min · 760–1.280 ¥ (recomendado)</span>
+              <span class="transport-badge">🚄 JR Pass — 45-75 min · 720 ¥</span>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🏨 Hotel — Kioto</h4>
+            <ul class="info-list">
+              <li><strong>Rest Inn Kioto</strong> — 235 Kamichōfukujichō, Shimogyo-ku, Kioto</li>
+              <li>Estación metro Gojo: 1,4 km</li>
+              <li>Estación metro Shijo: 1,5 km</li>
+              <li>Estación tren Karasuma: 1,6 km</li>
+              <li>Estación tren Shijo-Omija: 600 m (la más cercana)</li>
+            </ul>
+            <div style="height:10px"></div>
+            <div class="link-box">
+              <div class="link-label">📍 Google Maps — Hotel Kioto (Rest Inn Kioto)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://goo.gl/maps/6he9Yks9bBiT2U4V8" id="link-hotel-kioto" />
+                <button class="link-btn" onclick="saveLink('hotel-kioto')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-hotel-kioto">✅ Enlace guardado — <a id="href-hotel-kioto" href="https://goo.gl/maps/6he9Yks9bBiT2U4V8" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://goo.gl/maps/6he9Yks9bBiT2U4V8','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas / Eventos Kioto</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entrada / Actividad Kioto 1</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace entrada Kioto (Fushimi Inari, Kinkaku-ji...)" id="link-kioto-e1" />
+                <button class="link-btn" onclick="saveLink('kioto-e1')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-kioto-e1">✅ Guardado — <a id="href-kioto-e1" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d6" placeholder="Notas del día 6 — Nara a Kioto...">⚠️ Cargo de la Ciudad de Kioto: 1.800 yenes en total (los 3) a pagar en el hotel al llegar.</textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 7 -->
+      <div class="day-card">
+        <div class="day-header kioto" onclick="toggleDay(this)">
+          <div class="day-number kioto-num">7</div>
+          <div class="day-info">
+            <div class="day-emoji">🏯</div>
+            <h3>Kioto</h3>
+            <div class="day-date">Martes, 14 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🎫 Entradas / Eventos</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entrada / Actividad 1 — Día 7</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a entrada..." id="link-d7-e1" />
+                <button class="link-btn" onclick="saveLink('d7-e1')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-d7-e1">✅ Guardado — <a id="href-d7-e1" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+            <div style="height:8px"></div>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entrada / Actividad 2 — Día 7</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a segunda entrada..." id="link-d7-e2" />
+                <button class="link-btn" onclick="saveLink('d7-e2')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-d7-e2">✅ Guardado — <a id="href-d7-e2" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d7" placeholder="Notas del día 7 en Kioto..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 8 -->
+      <div class="day-card">
+        <div class="day-header kioto" onclick="toggleDay(this)">
+          <div class="day-number kioto-num">8</div>
+          <div class="day-info">
+            <div class="day-emoji">🌀</div>
+            <h3>Kioto — teamLab Biovortex</h3>
+            <div class="day-date">Miércoles, 15 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🌀 teamLab Biovortex Kioto</h4>
+            <ul class="info-list">
+              <li>Exposición de arte digital inmersivo <strong>teamLab Biovortex Kyoto</strong></li>
+              <li>📅 Fecha de admisión: <strong>Miércoles, 15 de abril de 2026</strong></li>
+              <li>🕐 Hora de entrada: <strong>11:30 – 12:00 h</strong></li>
+              <li>🔖 Número de consulta: <strong>KYC43WHHFULAH-0001</strong></li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>📍 Ubicación</h4>
+            <div class="link-box">
+              <div class="link-label">🗺️ Google Maps — teamLab Biovortex Kioto</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://maps.app.goo.gl/hr446TExGEmDyWoh8" id="link-biovortex-maps" />
+                <button class="link-btn" onclick="saveLink('biovortex-maps')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-biovortex-maps">✅ Enlace guardado — <a id="href-biovortex-maps" href="https://maps.app.goo.gl/hr446TExGEmDyWoh8" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/hr446TExGEmDyWoh8','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas teamLab Biovortex Kioto (PDF Dropbox)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://www.dropbox.com/scl/fi/hcc1kj0v3gemgwe5fcjcr/Official-Ticket-Store-_-teamLab-Biovortex-Kyoto-Kyoto-Japan.mht?rlkey=7yf5l9efv7omqy7c6rr57gdla&st=22a7aja4&dl=0" id="link-biovortex-entrada" />
+                <button class="link-btn" onclick="saveLink('biovortex-entrada')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-biovortex-entrada">✅ Guardado — <a id="href-biovortex-entrada" href="https://www.dropbox.com/scl/fi/hcc1kj0v3gemgwe5fcjcr/Official-Ticket-Store-_-teamLab-Biovortex-Kyoto-Kyoto-Japan.mht?rlkey=7yf5l9efv7omqy7c6rr57gdla&st=22a7aja4&dl=0" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://www.dropbox.com/scl/fi/hcc1kj0v3gemgwe5fcjcr/Official-Ticket-Store-_-teamLab-Biovortex-Kyoto-Kyoto-Japan.mht?rlkey=7yf5l9efv7omqy7c6rr57gdla&st=22a7aja4&dl=0','_blank')">🎫 Ver entradas</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d8" placeholder="Notas del día 8 — teamLab Biovortex Kioto..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 9 -->
+      <div class="day-card">
+        <div class="day-header transit" onclick="toggleDay(this)">
+          <div class="day-number transit-num">9</div>
+          <div class="day-info">
+            <div class="day-emoji">🚄</div>
+            <h3>Kioto → Tokio</h3>
+            <div class="day-date">Jueves, 16 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚄 Trayecto</h4>
+            <div>
+              <span class="transport-badge">🚄 Shinkansen Kioto → Tokio (opción directa)</span>
+              <span class="transport-badge">🚄 Opción alternativa: Kioto → Nagoya → Tokio</span>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🔗 Reserva Shinkansen</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Reserva Shinkansen Kioto-Tokio</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a reserva de Shinkansen..." id="link-shinkansen" />
+                <button class="link-btn" onclick="saveLink('shinkansen')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-shinkansen">✅ Guardado — <a id="href-shinkansen" href="#" target="_blank" class="link-view">🎫 Ver reserva</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🏨 Hotel — Tokio (check-in)</h4>
+            <div class="link-box">
+              <div class="link-label">📍 Google Maps — Hotel Tokio</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://goo.gl/maps/ydJhjfNyMJ8btd3BA" id="link-hotel-tokio" />
+                <button class="link-btn" onclick="saveLink('hotel-tokio')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-hotel-tokio">✅ Enlace guardado — <a id="href-hotel-tokio" href="https://goo.gl/maps/ydJhjfNyMJ8btd3BA" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://goo.gl/maps/ydJhjfNyMJ8btd3BA','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d9" placeholder="Notas del día 9 — viaje a Tokio..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: TOKIO -->
+  <div class="city-group" id="grupo-tokio">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #f8d7da, #ffffff); border-left: 5px solid #c0392b">
+      <div class="city-group-emoji">🗼</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#c0392b">Tokio</div>
+        <div class="city-group-sub">Días 10, 11, 12 y 13 · 17 – 20 Abril</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 10 -->
+      <div class="day-card">
+        <div class="day-header tokio" onclick="toggleDay(this)">
+          <div class="day-number tokio-num">10</div>
+          <div class="day-info">
+            <div class="day-emoji">🚶</div>
+            <h3>Tokio — Free Tour</h3>
+            <div class="day-date">Viernes, 17 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+                    <div class="card-section">
+            <h4>🚶 Free Tour por Tokio</h4>
+            <ul class="info-list">
+              <li>Free Tour organizado por Tokio</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Reserva Free Tour</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Reserva Free Tour Tokio</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a reserva del Free Tour Tokio..." id="link-freetour" />
+                <button class="link-btn" onclick="saveLink('freetour')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-freetour">✅ Guardado — <a id="href-freetour" href="#" target="_blank" class="link-view">🎫 Ver reserva</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d10" placeholder="Notas del día 10 — Free Tour Tokio..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 11 -->
+      <div class="day-card">
+        <div class="day-header tokio" onclick="toggleDay(this)">
+          <div class="day-number tokio-num">11</div>
+          <div class="day-info">
+            <div class="day-emoji">🗼</div>
+            <h3>Tokio</h3>
+            <div class="day-date">Sábado, 18 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🎫 Reserva Free Tour</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Reserva Free Tour Tokio</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a reserva del Free Tour..." id="link-freetour" />
+                <button class="link-btn" onclick="saveLink('freetour')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-freetour">✅ Guardado — <a id="href-freetour" href="#" target="_blank" class="link-view">🎫 Ver reserva</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d11" placeholder="Notas del día 11 en Tokio..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 12 -->
+      <div class="day-card">
+        <div class="day-header tokio" onclick="toggleDay(this)">
+          <div class="day-number tokio-num">12</div>
+          <div class="day-info">
+            <div class="day-emoji">🗼</div>
+            <h3>Tokio</h3>
+            <div class="day-date">Domingo, 19 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🎫 Entradas / Eventos</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Tokyo Disney Resort</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a compra de entradas Disney Tokio..." id="link-disney" />
+                <button class="link-btn" onclick="saveLink('disney')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-disney">✅ Guardado — <a id="href-disney" href="#" target="_blank" class="link-view">🎫 Ver entradas</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d12" placeholder="Notas del día 12 en Tokio..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 13 -->
+      <div class="day-card">
+        <div class="day-header tokio" onclick="toggleDay(this)">
+          <div class="day-number tokio-num">13</div>
+          <div class="day-info">
+            <div class="day-emoji">🐉</div>
+            <h3>Tokio — Museo Ghibli</h3>
+            <div class="day-date">Lunes, 20 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🎨 Museo del Estudio Ghibli</h4>
+            <ul class="info-list">
+              <li>🎫 Entradas a las <strong>12:00 h</strong></li>
+              <li>Mitaka, Tokio — dentro del Parque Inokashira</li>
+              <li>Museo dedicado al estudio de animación Studio Ghibli (Mi vecino Totoro, El viaje de Chihiro...)</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>📍 Ubicación</h4>
+            <div class="link-box">
+              <div class="link-label">🗺️ Google Maps — Museo del Estudio Ghibli</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://maps.app.goo.gl/WpGNNWev9DD46rGPA" id="link-ghibli-maps" />
+                <button class="link-btn" onclick="saveLink('ghibli-maps')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-ghibli-maps">✅ Enlace guardado — <a id="href-ghibli-maps" href="https://maps.app.goo.gl/WpGNNWev9DD46rGPA" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/WpGNNWev9DD46rGPA','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Museo Ghibli (PDF Dropbox)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://www.dropbox.com/scl/fi/z2czw7dzbprxb19lkgivm/entradas-museo-ghibli.pdf?rlkey=3llzrjtdoaxlp21ewi6hat0xc&st=fdc37ydw&dl=0" id="link-ghibli-entrada" />
+                <button class="link-btn" onclick="saveLink('ghibli-entrada')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-ghibli-entrada">✅ Guardado — <a id="href-ghibli-entrada" href="https://www.dropbox.com/scl/fi/z2czw7dzbprxb19lkgivm/entradas-museo-ghibli.pdf?rlkey=3llzrjtdoaxlp21ewi6hat0xc&st=fdc37ydw&dl=0" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://www.dropbox.com/scl/fi/z2czw7dzbprxb19lkgivm/entradas-museo-ghibli.pdf?rlkey=3llzrjtdoaxlp21ewi6hat0xc&st=fdc37ydw&dl=0','_blank')">🎫 Ver entradas</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d13" placeholder="Notas del día 13 — Museo Ghibli..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO: TRÁNSITO DE VUELTA -->
+  <div class="city-group" id="grupo-vuelta">
+    <div class="city-group-header" onclick="toggleGroup(this)" style="background:linear-gradient(90deg, #e2e3e5, #ffffff); border-left: 5px solid #6c757d">
+      <div class="city-group-emoji">✈️🚂</div>
+      <div class="city-group-info">
+        <div class="city-group-title" style="color:#6c757d">Tránsito de vuelta</div>
+        <div class="city-group-sub">Tokio → Madrid → Alicante</div>
+      </div>
+      <div class="city-group-toggle">▼</div>
+    </div>
+    <div class="city-group-body">
+    <!-- DIA 14 -->
+      <div class="day-card">
+        <div class="day-header transit" onclick="toggleDay(this)">
+          <div class="day-number transit-num">14</div>
+          <div class="day-info">
+            <div class="day-emoji">✈️</div>
+            <h3>Vuelo Tokio → Madrid</h3>
+            <div class="day-date">Martes, 21 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>✈️ Vuelo de vuelta</h4>
+            <ul class="info-list">
+              <li>Vuelo Tokio (NRT/HND) → Madrid (MAD)</li>
+              <li>Salida: 21:00 h</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>🔗 Enlace al vuelo</h4>
+            <div class="link-box">
+              <div class="link-label">🎫 Reserva vuelo de vuelta</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" placeholder="Enlace a la reserva del vuelo de vuelta..." id="link-d14-vuelo" />
+                <button class="link-btn" onclick="saveLink('d14-vuelo')">💾 Guardar</button>
+              </div>
+              <div class="link-saved" id="saved-d14-vuelo">✅ Guardado — <a id="href-d14-vuelo" href="#" target="_blank" class="link-view">🔗 Ver reserva</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d14" placeholder="Notas del día 14 — vuelo de regreso..."></textarea>
+          </div>
+        </div>
+      </div>
+    <!-- DIA 15 -->
+      <div class="day-card">
+        <div class="day-header transit" onclick="toggleDay(this)">
+          <div class="day-number transit-num">15</div>
+          <div class="day-info">
+            <div class="day-emoji">🏠</div>
+            <h3>Madrid → Alicante</h3>
+            <div class="day-date">Miércoles, 22 de Abril</div>
+          </div>
+          <div class="day-toggle">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="card-section">
+            <h4>🚂 Última etapa</h4>
+            <ul class="info-list">
+              <li>Tren Madrid → Alicante (RENFE)</li>
+              <li>¡Bienvenidos a casa! 🏠🎉</li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>📝 Notas del día</h4>
+            <textarea class="notes-area" id="notes-d15" placeholder="Notas del último día..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  🌸 Viaje a Japón · Abril 2026 · Familia · Hecho con ❤️ 🌸
+</footer>
+
+<script>
+  // ── Guardar enlace de interés (URL + descripción) ──
+  function saveEnlace(id) {
+    const urlInput = document.getElementById('link-' + id);
+    const descInput = document.getElementById('desc-' + id);
+    let url = urlInput ? urlInput.value.trim() : '';
+    const desc = descInput ? descInput.value.trim() : '';
+    if (!url) return;
+    if (!url.match(/^https?:\/\//i)) { url = 'https://' + url; urlInput.value = url; }
+    localStorage.setItem('japanenlace_url_' + id, url);
+    if (desc) localStorage.setItem('japanenlace_desc_' + id, desc);
+    const savedDiv = document.getElementById('saved-' + id);
+    const hrefEl = document.getElementById('href-' + id);
+    const labelEl = savedDiv ? savedDiv.querySelector('.link-label-text') : null;
+    if (hrefEl) hrefEl.href = url;
+    if (savedDiv) {
+      savedDiv.innerHTML = '✅ Guardado' + (desc ? ' — <strong>' + desc + '</strong>' : '') + ' — <a href="' + url + '" class="link-view" onclick="event.preventDefault();window.open(\'' + url + '\',\'_blank\')">🔗 Abrir enlace</a>';
+      savedDiv.classList.add('show');
+    }
+  }
+
+  function openEnlace(e, id) {
+    e.preventDefault();
+    const url = localStorage.getItem('japanenlace_url_' + id);
+    if (url) window.open(url, '_blank');
+  }
+
+  // ── Toggle subgrupo documentos ──
+  function toggleDocsGroup(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.docs-subgroup-toggle');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // ── Toggle grupo ciudad ──
+  function toggleGroup(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.city-group-toggle');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // ── Toggle día ──
+  function toggleDay(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.day-toggle');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // ── Guardar enlace con localStorage ──
+  function saveLink(id) {
+    const input = document.getElementById('link-' + id);
+    let url = input.value.trim();
+    if (!url) return;
+    // Añadir https:// automáticamente si falta el protocolo
+    if (url && !url.match(/^https?:\/\//i)) {
+      url = 'https://' + url;
+      input.value = url;
+    }
+    localStorage.setItem('japanlink_' + id, url);
+    showSaved(id, url);
+  }
+
+  function showSaved(id, url) {
+    const savedDiv = document.getElementById('saved-' + id);
+    const hrefEl = document.getElementById('href-' + id);
+    if (savedDiv && hrefEl) {
+      hrefEl.href = url;
+      // Abrir directamente con window.open para evitar bloqueos en archivo local
+      hrefEl.onclick = function(e) {
+        e.preventDefault();
+        window.open(url, '_blank');
+      };
+      savedDiv.classList.add('show');
+    }
+  }
+
+  // ── Auto-guardar notas al escribir ──
+  document.addEventListener('input', function(e) {
+    if (e.target && e.target.classList.contains('notes-area') && e.target.id) {
+      localStorage.setItem('japan_' + e.target.id, e.target.value);
+    }
+  });
+
+  // ── Cargar enlaces guardados al iniciar ──
+  window.addEventListener('DOMContentLoaded', () => {
+    // Enlace preconfigurado: Hotel Madrid
+    if (!localStorage.getItem('japanlink_hotel-madrid')) {
+      localStorage.setItem('japanlink_hotel-madrid', 'https://maps.app.goo.gl/EYMawhXwmfv2BSJG8');
+    }
+    // Enlace preconfigurado: Hotel Nara
+    if (!localStorage.getItem('japanlink_hotel-nara')) {
+      localStorage.setItem('japanlink_hotel-nara', 'https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA');
+    }
+    // Enlace preconfigurado: Hotel Osaka
+    if (!localStorage.getItem('japanlink_hotel-osaka')) {
+      localStorage.setItem('japanlink_hotel-osaka', 'https://goo.gl/maps/KPJHeHzvGiMMv9719');
+    }
+    // Enlace preconfigurado: Hotel Kioto
+    if (!localStorage.getItem('japanlink_hotel-kioto')) {
+      localStorage.setItem('japanlink_hotel-kioto', 'https://goo.gl/maps/6he9Yks9bBiT2U4V8');
+    }
+    // Enlace preconfigurado: Hotel Tokio
+    if (!localStorage.getItem('japanlink_hotel-tokio')) {
+      localStorage.setItem('japanlink_hotel-tokio', 'https://goo.gl/maps/ydJhjfNyMJ8btd3BA');
+    }
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('japanlink_'));
+    keys.forEach(k => {
+      const id = k.replace('japanlink_', '');
+      const url = localStorage.getItem(k);
+      const input = document.getElementById('link-' + id);
+      if (input && url) {
+        input.value = url;
+        showSaved(id, url);
+      }
+    });
+
+    // Restaurar notas guardadas
+    const noteIds = ['notes-d0','notes-d1','notes-d2','notes-d3','notes-d4',
+                     'notes-d5','notes-d6','notes-d7','notes-d8','notes-d9',
+                     'notes-d10','notes-d11','notes-d12','notes-d13','notes-d14','notes-d15'];
+    noteIds.forEach(id => {
+      const saved = localStorage.getItem('japan_' + id);
+      const el = document.getElementById(id);
+      if (el && saved !== null) el.value = saved;
+    });
+
+    // Restaurar enlaces de interés
+    const enlaceIds = [];
+    const poiCounts = {osaka:6, nara:5, kioto:6, tokio:6};
+    ['osaka','nara','kioto','tokio'].forEach(city => {
+      for (let n=1;n<=4;n++) enlaceIds.push(city+'-rest-'+n);
+      for (let n=1;n<=poiCounts[city];n++) enlaceIds.push(city+'-poi-'+n);
+    });
+    enlaceIds.forEach(id => {
+      const url = localStorage.getItem('japanenlace_url_' + id);
+      const desc = localStorage.getItem('japanenlace_desc_' + id);
+      if (url) {
+        const urlInput = document.getElementById('link-' + id);
+        const descInput = document.getElementById('desc-' + id);
+        if (urlInput) urlInput.value = url;
+        if (descInput && desc) descInput.value = desc;
+        const savedDiv = document.getElementById('saved-' + id);
+        if (savedDiv) {
+          savedDiv.innerHTML = '✅ Guardado' + (desc ? ' — <strong>' + desc + '</strong>' : '') + ' — <a href="' + url + '" class="link-view" onclick="event.preventDefault();window.open(\'' + url + '\',\'_blank\')">🔗 Abrir enlace</a>';
+          savedDiv.classList.add('show');
+        }
+      }
+    });
+
+    // Precargar nota Kioto (cargo ciudad)
+    const kiotoNote = document.getElementById('notes-d6');
+    if (kiotoNote && !localStorage.getItem('japan_notes-d6')) {
+      kiotoNote.value = '⚠️ Cargo de la Ciudad de Kioto: 1.800 yenes en total (los 3) a pagar en el hotel al llegar.';
+    }
+  });
+</script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log('SW registrado ✅'))
+          .catch(e => console.log('SW error:', e));
+      });
+    }
+  </script>
+</body>
+</html>
