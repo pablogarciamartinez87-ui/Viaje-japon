@@ -725,6 +725,22 @@
           </div>
           <div class="doc-arrow">→</div>
         </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/z32gaojedtwa6adqs0imv/entradas-Disneyland-Tokio.pdf?rlkey=ugfaqo0tl9sevtm45bzuy7wpg&st=1dtb55ld&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🎢</div>
+          <div class="doc-info">
+            <div class="doc-name">Tokyo Disneyland</div>
+            <div class="doc-sub">Entradas · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
+        <a class="doc-card" href="https://www.dropbox.com/scl/fi/zmtfenqfbxjg4r1jajuag/entradas-free-tour-tokio.pdf?rlkey=rsh99rlwx621r6scyq63lt4dn&st=uietxtie&dl=0" target="_blank" onclick="event.preventDefault();window.open(this.href,'_blank')">
+          <div class="doc-icon">🚶</div>
+          <div class="doc-info">
+            <div class="doc-name">Free Tour Tokio</div>
+            <div class="doc-sub">Entradas Asakusa · PDF</div>
+          </div>
+          <div class="doc-arrow">→</div>
+        </a>
         <div class="doc-card doc-empty" onclick="alert('Pendiente de añadir')">
           <div class="doc-icon">🎫</div>
           <div class="doc-info">
@@ -1880,33 +1896,45 @@
         <div class="day-header tokio" onclick="toggleDay(this)">
           <div class="day-number tokio-num">10</div>
           <div class="day-info">
-            <div class="day-emoji">🚶</div>
-            <h3>Tokio — Free Tour</h3>
+            <div class="day-emoji">🎢</div>
+            <h3>Tokio — Disneyland</h3>
             <div class="day-date">Viernes, 17 de Abril</div>
           </div>
           <div class="day-toggle">▼</div>
         </div>
         <div class="day-body">
-                    <div class="card-section">
-            <h4>🚶 Free Tour por Tokio</h4>
+          <div class="card-section">
+            <h4>🎢 Tokyo Disneyland</h4>
             <ul class="info-list">
-              <li>Free Tour organizado por Tokio</li>
+              <li>🎡 Parque de atracciones <strong>Tokyo Disneyland</strong></li>
+              <li>📅 Fecha: <strong>Viernes, 17 de abril de 2026</strong></li>
             </ul>
           </div>
           <div class="card-section">
-            <h4>🎫 Reserva Free Tour</h4>
+            <h4>📍 Ubicación</h4>
             <div class="link-box">
-              <div class="link-label">🎟️ Reserva Free Tour Tokio</div>
+              <div class="link-label">🗺️ Google Maps — Tokyo Disneyland</div>
               <div class="link-input-row">
-                <input class="link-input" type="url" placeholder="Enlace a reserva del Free Tour Tokio..." id="link-freetour" />
-                <button class="link-btn" onclick="saveLink('freetour')">💾 Guardar</button>
+                <input class="link-input" type="url" value="https://maps.app.goo.gl/bBiNzSob53QYYAdY6" id="link-disney-maps" />
+                <button class="link-btn" onclick="saveLink('disney-maps')">💾 Guardar</button>
               </div>
-              <div class="link-saved" id="saved-freetour">✅ Guardado — <a id="href-freetour" href="#" target="_blank" class="link-view">🎫 Ver reserva</a></div>
+              <div class="link-saved show" id="saved-disney-maps">✅ Enlace guardado — <a id="href-disney-maps" href="https://maps.app.goo.gl/bBiNzSob53QYYAdY6" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/bBiNzSob53QYYAdY6','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Tokyo Disneyland (PDF Dropbox)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://www.dropbox.com/scl/fi/z32gaojedtwa6adqs0imv/entradas-Disneyland-Tokio.pdf?rlkey=ugfaqo0tl9sevtm45bzuy7wpg&st=1dtb55ld&dl=0" id="link-disney-entrada" />
+                <button class="link-btn" onclick="saveLink('disney-entrada')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-disney-entrada">✅ Guardado — <a id="href-disney-entrada" href="https://www.dropbox.com/scl/fi/z32gaojedtwa6adqs0imv/entradas-Disneyland-Tokio.pdf?rlkey=ugfaqo0tl9sevtm45bzuy7wpg&st=1dtb55ld&dl=0" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://www.dropbox.com/scl/fi/z32gaojedtwa6adqs0imv/entradas-Disneyland-Tokio.pdf?rlkey=ugfaqo0tl9sevtm45bzuy7wpg&st=1dtb55ld&dl=0','_blank')">🎫 Ver entradas</a></div>
             </div>
           </div>
           <div class="card-section">
             <h4>📝 Notas del día</h4>
-            <textarea class="notes-area" id="notes-d10" placeholder="Notas del día 10 — Free Tour Tokio..."></textarea>
+            <textarea class="notes-area" id="notes-d10" placeholder="Notas del día 10 — Tokyo Disneyland..."></textarea>
           </div>
         </div>
       </div>
@@ -1915,27 +1943,46 @@
         <div class="day-header tokio" onclick="toggleDay(this)">
           <div class="day-number tokio-num">11</div>
           <div class="day-info">
-            <div class="day-emoji">🗼</div>
-            <h3>Tokio</h3>
+            <div class="day-emoji">🚶</div>
+            <h3>Tokio — Free Tour Asakusa</h3>
             <div class="day-date">Sábado, 18 de Abril</div>
           </div>
           <div class="day-toggle">▼</div>
         </div>
         <div class="day-body">
           <div class="card-section">
-            <h4>🎫 Reserva Free Tour</h4>
+            <h4>🚶 Free Tour — Barrio de Asakusa</h4>
+            <ul class="info-list">
+              <li>🕒 Hora de inicio: <strong>15:00 h</strong></li>
+              <li>⚠️ Llegar <strong>15 minutos antes</strong> → estar a las <strong>14:45 h</strong></li>
+              <li>📍 Punto de encuentro: <strong>frente a la comisaría de Asakusa</strong></li>
+            </ul>
+          </div>
+          <div class="card-section">
+            <h4>📍 Punto de encuentro</h4>
             <div class="link-box">
-              <div class="link-label">🎟️ Reserva Free Tour Tokio</div>
+              <div class="link-label">🗺️ Google Maps — Inicio Free Tour Asakusa</div>
               <div class="link-input-row">
-                <input class="link-input" type="url" placeholder="Enlace a reserva del Free Tour..." id="link-freetour" />
-                <button class="link-btn" onclick="saveLink('freetour')">💾 Guardar</button>
+                <input class="link-input" type="url" value="https://goo.gl/maps/XpwEvVfmDxJq75QW9" id="link-freetour-tokio-maps" />
+                <button class="link-btn" onclick="saveLink('freetour-tokio-maps')">💾 Guardar</button>
               </div>
-              <div class="link-saved" id="saved-freetour">✅ Guardado — <a id="href-freetour" href="#" target="_blank" class="link-view">🎫 Ver reserva</a></div>
+              <div class="link-saved show" id="saved-freetour-tokio-maps">✅ Enlace guardado — <a id="href-freetour-tokio-maps" href="https://goo.gl/maps/XpwEvVfmDxJq75QW9" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://goo.gl/maps/XpwEvVfmDxJq75QW9','_blank')">🗺️ Ver en Maps</a></div>
+            </div>
+          </div>
+          <div class="card-section">
+            <h4>🎫 Entradas</h4>
+            <div class="link-box">
+              <div class="link-label">🎟️ Entradas Free Tour Tokio — Asakusa (PDF Dropbox)</div>
+              <div class="link-input-row">
+                <input class="link-input" type="url" value="https://www.dropbox.com/scl/fi/zmtfenqfbxjg4r1jajuag/entradas-free-tour-tokio.pdf?rlkey=rsh99rlwx621r6scyq63lt4dn&st=uietxtie&dl=0" id="link-freetour-tokio-entrada" />
+                <button class="link-btn" onclick="saveLink('freetour-tokio-entrada')">💾 Guardar</button>
+              </div>
+              <div class="link-saved show" id="saved-freetour-tokio-entrada">✅ Guardado — <a id="href-freetour-tokio-entrada" href="https://www.dropbox.com/scl/fi/zmtfenqfbxjg4r1jajuag/entradas-free-tour-tokio.pdf?rlkey=rsh99rlwx621r6scyq63lt4dn&st=uietxtie&dl=0" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://www.dropbox.com/scl/fi/zmtfenqfbxjg4r1jajuag/entradas-free-tour-tokio.pdf?rlkey=rsh99rlwx621r6scyq63lt4dn&st=uietxtie&dl=0','_blank')">🎫 Ver entradas</a></div>
             </div>
           </div>
           <div class="card-section">
             <h4>📝 Notas del día</h4>
-            <textarea class="notes-area" id="notes-d11" placeholder="Notas del día 11 en Tokio..."></textarea>
+            <textarea class="notes-area" id="notes-d11" placeholder="Notas del día 11 — Free Tour Asakusa, Tokio..."></textarea>
           </div>
         </div>
       </div>
