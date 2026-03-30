@@ -430,6 +430,32 @@
 
 
 
+
+    /* ── GASTOS ── */
+    .gastos-section { background: #f0faf4; border: 1px solid #b7dfc9; border-radius: 10px; padding: 14px 16px; }
+    .gastos-section h4 { color: #1a7a4a; margin-bottom: 10px; }
+    .gastos-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .gastos-input {
+      border: 1.5px solid #b7dfc9; border-radius: 8px; padding: 8px 12px;
+      font-size: 1em; width: 150px; background: white; color: var(--dark);
+    }
+    .gastos-input:focus { outline: none; border-color: #27ae60; }
+    .gastos-label { font-size: 0.9em; color: #555; }
+    .gastos-eur { font-size: 0.9em; color: #1a7a4a; font-weight: 700; min-width: 80px; }
+
+    /* ── RESUMEN GASTOS ── */
+    .gastos-resumen { background: white; border-radius: 16px; box-shadow: 0 4px 18px rgba(0,0,0,0.1); padding: 24px; margin-top: 30px; }
+    .gastos-resumen h3 { font-family: 'Playfair Display', serif; font-size: 1.4em; color: var(--dark); margin-bottom: 6px; }
+    .gastos-resumen-sub { font-size: 0.85em; color: #888; margin-bottom: 16px; }
+    .gastos-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+    .gastos-table th { background: #1a1a2e; color: white; padding: 8px 12px; text-align: left; }
+    .gastos-table td { padding: 7px 12px; border-bottom: 1px solid #eee; }
+    .gastos-table tr:last-child td { border-bottom: none; }
+    .gastos-table tr.total-row td { font-weight: 700; background: #f0faf4; color: #1a7a4a; font-size: 1em; border-top: 2px solid #27ae60; }
+    .gastos-table .zero { color: #ccc; }
+    .tasa-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 0.9em; color: #555; }
+    .tasa-input { border: 1.5px solid #ddd; border-radius: 6px; padding: 5px 8px; width: 80px; font-size: 0.9em; }
+
     /* ── DOCS SUBGROUPS ── */
 
     .resto-prefilled { background: #fffaf5; }
@@ -1344,6 +1370,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d0" placeholder="Notas del día 0 — tren a Madrid y alojamiento en Barajas..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 0</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d0" oninput="actualizarGasto(0)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d0">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 1 -->
@@ -1379,6 +1414,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d1" placeholder="Notas del día 1..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 1</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d1" oninput="actualizarGasto(1)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d1">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1390,7 +1434,7 @@
       <div class="city-group-emoji">🏯</div>
       <div class="city-group-info">
         <div class="city-group-title" style="color:#e67e22">Osaka</div>
-        <div class="city-group-sub">Días 2, 3 y 4 · 09 – 11 Abril</div>
+        <div class="city-group-sub">09 – 11 Abril</div>
       </div>
       <div class="city-group-toggle">▼</div>
     </div>
@@ -1439,6 +1483,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d2" placeholder="Notas del día 2..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 2</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d2" oninput="actualizarGasto(2)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d2">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 3 -->
@@ -1485,6 +1538,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d3" placeholder="Notas del día 3 — Free Tour Osaka..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 3</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d3" oninput="actualizarGasto(3)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d3">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 4 -->
@@ -1514,6 +1576,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d4" placeholder="Notas del día 4 en Osaka..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 4</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d4" oninput="actualizarGasto(4)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d4">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1525,7 +1596,7 @@
       <div class="city-group-emoji">🦌</div>
       <div class="city-group-info">
         <div class="city-group-title" style="color:#27ae60">Nara</div>
-        <div class="city-group-sub">Día 5 · 12 Abril</div>
+        <div class="city-group-sub">12 Abril</div>
       </div>
       <div class="city-group-toggle">▼</div>
     </div>
@@ -1571,106 +1642,21 @@
               <div class="link-saved show" id="saved-hotel-nara">✅ Enlace guardado — <a id="href-hotel-nara" href="https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA" target="_blank" class="link-view" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/ZXJG3WCww4aQY3pQA','_blank')">🗺️ Ver en Maps</a></div>
             </div>
           </div>
-          <div class="card-section">
-            <h4>🏛️ Qué ver en Nara</h4>
-            <div class="attraction-item">
-              <div class="attraction-num">1</div>
-              <div class="attraction-content">
-                <div class="attraction-name">Parque de Nara · Todai-ji Nandaimon</div>
-                <div class="attraction-desc">La Gran Puerta Sur del templo Todai-ji. Punto de encuentro con los ciervos sagrados libres por el parque.</div>
-                <div class="attraction-meta"><span class="meta-badge">🦌 Ciervos libres</span></div>
-              </div>
-            </div>
-            <div class="attraction-item">
-              <div class="attraction-num">2</div>
-              <div class="attraction-content">
-                <div class="attraction-name">Templo Todai-ji</div>
-                <div class="attraction-desc">Alberga el Daibutsu, una estatua de Buda de 15 m de altura, una de las más grandes de Japón.</div>
-                <div class="attraction-meta"><span class="meta-badge">💰 600 ¥</span><span class="meta-badge">🕗 08:00 – 17:00</span></div>
-              </div>
-            </div>
-            <div class="attraction-item">
-              <div class="attraction-num">3</div>
-              <div class="attraction-content">
-                <div class="attraction-name">Santuario Kasuga Taisha</div>
-                <div class="attraction-desc">Santuario sintoísta decorado con más de 1.000 farolillos de piedra y bronce. Uno de los más antiguos de Japón.</div>
-                <div class="attraction-meta"><span class="meta-badge">💰 600 ¥</span><span class="meta-badge">🕗 06:00 – 18:00</span></div>
-              </div>
-            </div>
-            <div class="attraction-item">
-              <div class="attraction-num">4</div>
-              <div class="attraction-content">
-                <div class="attraction-name">Templo Kōfuku-ji</div>
-                <div class="attraction-desc">Cuatro edificios declarados Tesoro Nacional: pagoda de cinco pisos, pagoda de tres pisos, Hokuendo y Tokondo.</div>
-              </div>
-            </div>
-            <div class="attraction-item">
-              <div class="attraction-num">5</div>
-              <div class="attraction-content">
-                <div class="attraction-name">Naramachi</div>
-                <div class="attraction-desc">Barrio histórico para pasear y probar kakinoha-zushi. Casas Machiya Koshi-no-Ie y residencia Imanishike Shoin.</div>
-                <div class="attraction-meta"><span class="meta-badge">🍵 Té con dulces</span><span class="meta-badge">🐒 Amuleto migawari-zaru</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-section">
-            <h4>🎫 Entradas</h4>
-            <div class="link-box">
-              <div class="link-label">🎟️ Entrada Templo Todai-ji</div>
-              <div class="link-input-row">
-                <input class="link-input" type="url" placeholder="Enlace reserva / compra entrada Todai-ji..." id="link-nara-todaiji" />
-                <button class="link-btn" onclick="saveLink('nara-todaiji')">💾 Guardar</button>
-              </div>
-              <div class="link-saved" id="saved-nara-todaiji">✅ Guardado — <a id="href-nara-todaiji" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
-            </div>
-            <div style="height:8px"></div>
-            <div class="link-box">
-              <div class="link-label">🎟️ Entrada Kasuga Taisha</div>
-              <div class="link-input-row">
-                <input class="link-input" type="url" placeholder="Enlace reserva / compra entrada Kasuga Taisha..." id="link-nara-kasuga" />
-                <button class="link-btn" onclick="saveLink('nara-kasuga')">💾 Guardar</button>
-              </div>
-              <div class="link-saved" id="saved-nara-kasuga">✅ Guardado — <a id="href-nara-kasuga" href="#" target="_blank" class="link-view">🎫 Ver entrada</a></div>
-            </div>
-          </div>
-          <div class="card-section">
-            <h4>🍜 Restaurantes recomendados</h4>
-            <div class="resto-grid">
-              <div class="resto-card">
-                <div class="resto-name">Surugamachi's Okonomiyakiya</div>
-                <div class="resto-type">Okonomiyaki</div>
-                <div class="resto-detail">¥800–900 · Todos los días 12–15h y 17–21h</div>
-              </div>
-              <div class="resto-card">
-                <div class="resto-name">Tonkatsu Ganko Nara</div>
-                <div class="resto-type">Tonkatsu</div>
-                <div class="resto-detail">¥880–1.180 · 19 Higashimuki Nakamachi · 11–21h</div>
-              </div>
-              <div class="resto-card">
-                <div class="resto-name">Mizuya Chaya</div>
-                <div class="resto-type">Udon</div>
-                <div class="resto-detail">¥550–850 · 30 Kasuganocho · 11–15:30h (cerrado miérc.)</div>
-              </div>
-              <div class="resto-card">
-                <div class="resto-name">Soba-dokoro Kitahara</div>
-                <div class="resto-type">Soba</div>
-                <div class="resto-detail">¥950–1.600 · 50 Suimoncho · 11–15h (cerrado martes)</div>
-              </div>
-              <div class="resto-card">
-                <div class="resto-name">Takumi</div>
-                <div class="resto-type">Okonomiyaki</div>
-                <div class="resto-detail">¥850–1.250 · 485 Sanjocho · 12–19h (cerr. dom. y lun.)</div>
-              </div>
-              <div class="resto-card">
-                <div class="resto-name">Melon de Melon</div>
-                <div class="resto-type">Meronpan 🍈</div>
-                <div class="resto-detail">¥250 · 30-1 Shimosanjocho · 10–19h todos los días</div>
-              </div>
-            </div>
-          </div>
+
+
+
           <div class="card-section">
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d5" placeholder="Notas del día 5 — Osaka a Nara..."></textarea>
+          </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 5</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d5" oninput="actualizarGasto(5)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d5">0,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1683,7 +1669,7 @@
       <div class="city-group-emoji">⛩️</div>
       <div class="city-group-info">
         <div class="city-group-title" style="color:#2980b9">Kioto</div>
-        <div class="city-group-sub">Días 6, 7, 8 y 9 · 13 – 16 Abril</div>
+        <div class="city-group-sub">13 – 16 Abril</div>
       </div>
       <div class="city-group-toggle">▼</div>
     </div>
@@ -1741,6 +1727,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d6" placeholder="Notas del día 6 — Nara a Kioto...">⚠️ Cargo de la Ciudad de Kioto: 1.800 yenes en total (los 3) a pagar en el hotel al llegar.</textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 6</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d6" oninput="actualizarGasto(6)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d6">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 7 -->
@@ -1778,6 +1773,15 @@
           <div class="card-section">
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d7" placeholder="Notas del día 7 en Kioto..."></textarea>
+          </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 7</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d7" oninput="actualizarGasto(7)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d7">0,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1828,6 +1832,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d8" placeholder="Notas del día 8 — teamLab Biovortex Kioto..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 8</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d8" oninput="actualizarGasto(8)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d8">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 9 -->
@@ -1875,6 +1888,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d9" placeholder="Notas del día 9 — viaje a Tokio..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 9</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d9" oninput="actualizarGasto(9)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d9">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1886,7 +1908,7 @@
       <div class="city-group-emoji">🗼</div>
       <div class="city-group-info">
         <div class="city-group-title" style="color:#c0392b">Tokio</div>
-        <div class="city-group-sub">Días 10, 11, 12 y 13 · 17 – 20 Abril</div>
+        <div class="city-group-sub">17 – 20 Abril</div>
       </div>
       <div class="city-group-toggle">▼</div>
     </div>
@@ -1936,6 +1958,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d10" placeholder="Notas del día 10 — Tokyo Disneyland..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 10</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d10" oninput="actualizarGasto(10)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d10">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 11 -->
@@ -1984,6 +2015,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d11" placeholder="Notas del día 11 — Free Tour Asakusa, Tokio..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 11</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d11" oninput="actualizarGasto(11)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d11">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 12 -->
@@ -2012,6 +2052,15 @@
           <div class="card-section">
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d12" placeholder="Notas del día 12 en Tokio..."></textarea>
+          </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 12</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d12" oninput="actualizarGasto(12)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d12">0,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -2060,6 +2109,15 @@
           <div class="card-section">
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d13" placeholder="Notas del día 13 — Museo Ghibli..."></textarea>
+          </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 13</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d13" oninput="actualizarGasto(13)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d13">0,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -2111,6 +2169,15 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d14" placeholder="Notas del día 14 — vuelo de regreso..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 14</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d14" oninput="actualizarGasto(14)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d14">0,00 €</span>
+            </div>
+          </div>
         </div>
       </div>
     <!-- DIA 15 -->
@@ -2136,7 +2203,38 @@
             <h4>📝 Notas del día</h4>
             <textarea class="notes-area" id="notes-d15" placeholder="Notas del último día..."></textarea>
           </div>
+          <div class="card-section gastos-section">
+            <h4>💴 Gastos del día 15</h4>
+            <div class="gastos-row">
+              <input class="gastos-input" type="number" min="0" placeholder="0 ¥"
+                id="gasto-d15" oninput="actualizarGasto(15)" />
+              <span class="gastos-label">¥ →</span>
+              <span class="gastos-eur" id="gasto-eur-d15">0,00 €</span>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══ RESUMEN GASTOS ═══ -->
+  <div class="gastos-resumen">
+    <h3>💴 Resumen de gastos del viaje</h3>
+    <div class="tasa-row">
+      <label for="tasa-cambio">💱 Tasa de cambio:</label>
+      <strong>1 € =</strong>
+      <input class="tasa-input" type="number" id="tasa-cambio" value="162" min="1" oninput="recalcularTodo()" />
+      <strong>¥</strong>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:10px;">
+      <div style="flex:1; min-width:140px; background:#f0faf4; border-radius:12px; padding:18px 22px; text-align:center; border:2px solid #27ae60;">
+        <div style="font-size:0.85em; color:#555; margin-bottom:6px;">Total en yenes</div>
+        <div id="total-yenes" style="font-size:1.8em; font-weight:700; color:#1a7a4a;">0 ¥</div>
+      </div>
+      <div style="flex:1; min-width:140px; background:#eaf4ff; border-radius:12px; padding:18px 22px; text-align:center; border:2px solid #2980b9;">
+        <div style="font-size:0.85em; color:#555; margin-bottom:6px;">Total en euros</div>
+        <div id="total-euros" style="font-size:1.8em; font-weight:700; color:#1a5276;">0,00 €</div>
       </div>
     </div>
   </div>
@@ -2174,6 +2272,62 @@
     const url = localStorage.getItem('japanenlace_url_' + id);
     if (url) window.open(url, '_blank');
   }
+
+
+  // ── GASTOS ──
+  function getTasa() {
+    return parseFloat(document.getElementById('tasa-cambio').value) || 162;
+  }
+
+  function actualizarGasto(d) {
+    const input = document.getElementById('gasto-d' + d);
+    const yenes = parseInt(input.value) || 0;
+    const tasa = getTasa();
+    const euros = yenes / tasa;
+    const eurEl = document.getElementById('gasto-eur-d' + d);
+    if (eurEl) eurEl.textContent = euros.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+    localStorage.setItem('japan_gasto_d' + d, yenes);
+    actualizarResumen();
+  }
+
+  function recalcularTodo() {
+    const tasa = getTasa();
+    localStorage.setItem('japan_tasa', tasa);
+    for (let d = 0; d <= 15; d++) {
+      const input = document.getElementById('gasto-d' + d);
+      if (input) {
+        const yenes = parseInt(input.value) || 0;
+        const eurEl = document.getElementById('gasto-eur-d' + d);
+        if (eurEl) eurEl.textContent = (yenes / tasa).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+      }
+    }
+    actualizarResumen();
+  }
+
+  function actualizarResumen() {
+    const tasa = getTasa();
+    let totalYenes = 0;
+    for (let d = 0; d <= 15; d++) {
+      const yenes = parseInt(localStorage.getItem('japan_gasto_d' + d)) || 0;
+      totalYenes += yenes;
+      const euros = yenes / tasa;
+      const yCel = document.getElementById('resumen-yenes-d' + d);
+      const eCel = document.getElementById('resumen-euros-d' + d);
+      if (yCel) {
+        yCel.textContent = yenes > 0 ? yenes.toLocaleString('es-ES') + ' ¥' : '—';
+        yCel.className = yenes > 0 ? '' : 'zero';
+      }
+      if (eCel) {
+        eCel.textContent = yenes > 0 ? euros.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €' : '—';
+        eCel.className = yenes > 0 ? '' : 'zero';
+      }
+    }
+    const totalEuros = totalYenes / tasa;
+    document.getElementById('total-yenes').textContent = totalYenes.toLocaleString('es-ES') + ' ¥';
+    document.getElementById('total-euros').textContent = totalEuros.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  }
+
+  // Restaurar gastos al cargar
 
   // ── Toggle subgrupo documentos ──
   function toggleDocsGroup(header) {
@@ -2266,6 +2420,18 @@
         showSaved(id, url);
       }
     });
+
+    // Restaurar gastos
+    const savedTasa = localStorage.getItem('japan_tasa');
+    if (savedTasa) document.getElementById('tasa-cambio').value = savedTasa;
+    for (let d = 0; d <= 15; d++) {
+      const saved = localStorage.getItem('japan_gasto_d' + d);
+      if (saved) {
+        const input = document.getElementById('gasto-d' + d);
+        if (input) input.value = saved;
+      }
+    }
+    actualizarResumen();
 
     // Restaurar notas guardadas
     const noteIds = ['notes-d0','notes-d1','notes-d2','notes-d3','notes-d4',
